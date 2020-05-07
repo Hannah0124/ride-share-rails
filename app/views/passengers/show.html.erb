@@ -1,0 +1,61 @@
+<section class="passengers__show__conatiner">
+  <h3 class="show__title">About <%= @passenger[:name] %></h3>
+  <div class="show__div-container">
+    <%= image_tag "http://www.thispersondoesnotexist.com/image", alt: "profile-photo", class: "passengers__show__profile-image" %>
+    <p>
+      <span class="show__detail-title">Phone Number:</span>
+      <%= @passenger[:phone_num] %>
+    </p>
+    <p>
+      <span class="show__detail-title">Total Charges:</span>
+      $ <%= @passenger.total_charges %>
+    </p>
+  </div>
+
+  <div class="show__btn">
+    <%= link_to "E D I T ✏️  ", edit_passenger_path(@passenger.id), class: 'show__edit-btn' %>
+  </div>
+
+  <div class="show__btn">
+    <%= link_to " Delete ❌ ", passenger_path(@passenger.id), method: :delete, data: { confirm: '❗️ Would you like to delete the passenger?'}, class: 'show__delete-btn' %>
+  </div>
+</section>
+
+
+
+<%# reference: https://codepen.io/nikhil8krishnan/pen/WvYPvv %>
+<section>
+  <h1><%= @passenger.name %>'s Trips</h1>
+  <div class="tbl-header show__background">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>Trip ID</th>
+          <th>Trip Date</th>
+          <th>Passenger Name</th>
+          <th>Driver Name</th>
+          <th>Cost</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        
+          <% @passenger.trips.each do |trip| %>
+            <tr>
+              <td><%= trip.id %></td>
+              <td><%= trip.date %></td>
+              <td><%= link_to trip.passenger.name, passenger_path(trip.passenger) %></td>
+              <td><%= link_to trip.driver.name, driver_path(trip.driver) %></td>
+              <td>$<%= trip.cost %></td>
+              <td>⭐️<%= trip.rating %></td>
+            </tr>
+          <% end %>
+        
+      </tbody>
+    </table>
+  </div>
+</section>
