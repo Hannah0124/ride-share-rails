@@ -1,0 +1,69 @@
+<section class="drivers__show__conatiner">
+  <h3 class="show__title">About <%= @driver[:name] %></h3>
+  <div class="show__div-container">
+    <%= image_tag "http://www.thispersondoesnotexist.com/image", alt: "profile-photo", class: "drivers__show__profile-image" %>
+    <p>
+      <span class="show__detail-title">VIN:</span>
+      <%= @driver[:vin] %>
+    </p>
+    <p>
+      <span class="show__detail-title">Available:</span>
+      <%= @driver[:available] %>
+    </p>
+    <p>
+      <span class="show__detail-title">Total Earnings:</span>
+      $ <%= @driver.total_earnings %>
+    </p>
+    <p>
+      <span class="show__detail-title">Average Rating:</span>
+      ⭐️<strong><%= @driver.average_rating %></strong> / 5
+    </p>
+  </div>
+
+  <div class="show__btn">
+    <%= link_to "E D I T ✏️  ", edit_driver_path(@driver.id), class: 'show__edit-btn' %>
+  </div>
+
+  <div class="show__btn">
+    <%= link_to " Delete ❌ ", driver_path(@driver.id), method: :delete, data: { confirm: '❗️ Would you like to delete the driver?'}, class: 'show__delete-btn' %>
+  </div>
+</section>
+
+
+
+<%# reference: https://codepen.io/nikhil8krishnan/pen/WvYPvv %>
+<section>
+  <h1><%= @driver.name %>'s Trips</h1>
+  <div class="tbl-header show__background">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>Trip ID</th>
+          <th>Trip Date</th>
+          <th>Passenger Name</th>
+          <th>Driver Name</th>
+          <th>Cost</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        
+          <% @driver.trips.each do |trip| %>
+            <tr>
+              <td><%= trip.id %></td>
+              <td><%= trip.date %></td>
+              <td><%= link_to trip.passenger.name, passenger_path(trip.passenger) %></td>
+              <td><%= link_to trip.driver.name, driver_path(trip.driver) %></td>
+              <td>$<%= trip.cost %></td>
+              <td>⭐️<%= trip.rating %></td>
+            </tr>
+          <% end %>
+        
+      </tbody>
+    </table>
+  </div>
+</section>
