@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RideShareRails</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <%# https://codepen.io/andornagy/pen/RNeydj %>
+  <body>
+    <header>
+      <nav>
+        <div id="logo">Ride Share</div>
+
+        <label for="drop" class="toggle">Menu</label>
+        <input type="checkbox" id="drop" />
+          <ul class="menu">
+            <li><%= link_to "Home", root_path %></li>
+
+            <li>
+              <!-- Drop Down -->
+              <label for="drop-1" class="toggle">Drivers +</label>
+              <a href="#">Drivers</a>
+              <input type="checkbox" id="drop-1"/>
+              <ul>
+                <li><%= link_to "Show Drivers", drivers_path %></li>
+                <li><%= link_to "Add Drivers", new_driver_path %></li>
+              </ul> 
+            </li>
+
+            <li>
+              <!-- Drop Down -->
+              <label for="drop-2" class="toggle">Passengers +</label>
+              <a href="#">Passengers</a>
+              <input type="checkbox" id="drop-2"/>
+              <ul>
+                <li><%= link_to "Show Passengers", passengers_path %></li>
+                <li><%= link_to "Add Passengers", new_passenger_path %></li>
+              </ul> 
+            </li>
+            <li></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <%= yield %>
+      </main>
+  </body>
+  <footer>
+    <p>© 2020 Yoyo & Hannah J</p>
+  </footer>
+</html>
+
+
