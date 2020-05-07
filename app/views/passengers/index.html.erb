@@ -1,0 +1,38 @@
+<section class="passengers__show__conatiner">
+  <h3 class="show__title">Passenger List</h3>
+  <div class="show__btn">
+    <%= link_to "➕Add Passenger", new_passenger_path, class: 'index__add-btn' %>
+  </div>
+</section>
+
+
+
+<%# reference: https://codepen.io/nikhil8krishnan/pen/WvYPvv %>
+<section>
+  <div class="tbl-header show__background">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>Passenger ID</th>
+          <th>Name</th>
+          <th>Phone Number</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        
+          <% @passengers.each do |passenger| %>
+            <tr>
+              <td><%= passenger.id %></td>
+              <td><%= link_to passenger.name, passenger_path(passenger) %></td>
+              <td><%= passenger.phone_num %></td>
+            </tr>
+          <% end %>
+        
+      </tbody>
+    </table>
+  </div>
+</section>
