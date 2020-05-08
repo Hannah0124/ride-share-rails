@@ -16,9 +16,15 @@
   height: 100%;
 }
 
-
-.show__title {
+.drivers__index__title {
   margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+.drivers__show__title {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .drivers__show__conatiner, .drivers__index__conatiner {
@@ -29,7 +35,7 @@
   margin: 0px;
 }
 
-.show__div-container p {
+.drivers__show__div-container p {
   margin-top: 20px;
   margin-bottom: 20px;
   font-size: 15px;
@@ -40,12 +46,10 @@
   width: 220px;
   border-radius: 50%;
   margin: 0 50px;
-  margin-left: auto;
-  margin-right: auto;
   align-self: center;
 }
 
-.show__background, .index__background {
+.drivers__show__background, .drivers__index__background {
   background: -webkit-linear-gradient(left, #25c481, #25b7c4);
   background: linear-gradient(to right, #25c481, #25b7c4);
   font-family: 'Roboto', sans-serif;
@@ -56,7 +60,7 @@ section {
 }
 
 
-.show__trip-title {
+.drivers__show__trip-title {
   text-align: center;
   margin-bottom: 20px;
 }
@@ -170,23 +174,30 @@ td {
   font-size: 18px;
 }
 
-.show__btn {
+.drivers__show__btn {
+  margin-top: 20px;
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
-.show__edit-btn {
-  margin-bottom: 10px; 
+.drivers__show__edit-btn, .drivers__show__delete-btn {
+  margin-right: 10px;
+  align-self: center;
+  justify-self: center;
 }
 
-.show__edit-btn, .show__delete-btn {
+.drivers__show__edit-btn, .drivers__show__delete-btn, .drivers__index__add-btn {
   border-radius: 10px;
+  padding: 5px 5px;
   border: #25B7C2 solid 3px;
   color: #25B7C2;
   font-size: 18px;
-  padding: 5px 5px;
+  height: 50px;
 }
 
-._form__driver-btn:hover, .show__edit-btn:hover, .show__delete-btn:hover {
+._form__passenger-btn:hover, .drivers__show__edit-btn:hover, .drivers__show__delete-btn:hover, .drivers__index__add-btn:hover {
   letter-spacing: 0.1rem;
   font-weight: bold;
   color: #25B7C2;

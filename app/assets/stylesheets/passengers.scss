@@ -14,9 +14,15 @@
   height: 100%;
 }
 
+.passengers__index__title {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
 
-.show__title {
+
+.passengers__show__title {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .passengers__show__conatiner, .passengers__index__conatiner {
@@ -27,7 +33,7 @@
   margin: 0px;
 }
 
-.show__div-container p {
+.passengers__show__div-container p {
   margin-top: 20px;
   margin-bottom: 20px;
   font-size: 15px;
@@ -38,12 +44,12 @@
   width: 220px;
   border-radius: 50%;
   margin: 0 50px;
-  margin-left: auto;
-  margin-right: auto;
+  // margin-left: auto;
+  // margin-right: auto;
   align-self: center;
 }
 
-.show__background, .index__background {
+.passengers__show__background, .index__background {
   background: -webkit-linear-gradient(left, #25c481, #25b7c4);
   background: linear-gradient(to right, #25c481, #25b7c4);
   font-family: 'Roboto', sans-serif;
@@ -54,7 +60,7 @@ section {
 }
 
 
-.show__trip-title {
+.passengers__show__trip-title {
   text-align: center;
   margin-bottom: 20px;
 }
@@ -169,23 +175,30 @@ td {
   font-size: 18px;
 }
 
-.show__btn {
+.passengers__show__btn {
+  margin-top: 20px;
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
-.show__edit-btn {
-  margin-bottom: 10px; 
+.passengers__show__edit-btn, .passengers__show__delete-btn {
+  margin-right: 10px;
+  align-self: center;
+  justify-self: center;
 }
 
-.show__edit-btn, .show__delete-btn {
+.passengers__show__edit-btn, .passengers__show__delete-btn, .passengers__show__add-btn, .passengers__index__add-btn {
   border-radius: 10px;
   padding: 5px 5px;
   border: #25B7C2 solid 3px;
   color: #25B7C2;
   font-size: 18px;
+  height: 50px;
 }
 
-._form__passenger-btn:hover, .show__edit-btn:hover, .show__delete-btn:hover {
+._form__passenger-btn:hover, .passengers__show__edit-btn:hover, .passengers__show__delete-btn:hover, .passengers__show__add-btn:hover, .passengers__index__add-btn:hover {
   letter-spacing: 0.1rem;
   font-weight: bold;
   color: #25B7C2;

@@ -1,27 +1,25 @@
 <section class="passengers__show__conatiner">
-  <h3 class="show__title">About Passenger</h3>
-  <div class="show__div-container">
+  <h3 class="passengers__show__title">About Passenger</h3>
+  <div class="passengers__show__div-container">
     <%= image_tag "https://placedog.net/250/250?random", alt: "profile-photo", class: "passengers__show__profile-image" %>
     <p>
-      <span class="show__detail-title">Name:</span>
+      <span class="passengers__show__detail-title">Name:</span>
       <%= @passenger[:name] %>
     </p>
     <p>
-      <span class="show__detail-title">Phone Number:</span>
+      <span class="passengers__show__detail-title">Phone Number:</span>
       <%= @passenger[:phone_num] %>
     </p>
     <p>
-      <span class="show__detail-title">Total Charges:</span>
+      <span class="passengers__show__detail-title">Total Charges:</span>
       $ <%= @passenger.total_charges %>
     </p>
   </div>
 
-  <div class="show__btn">
-    <%= link_to "E D I T ✏️  ", edit_passenger_path(@passenger.id), class: 'show__edit-btn' %>
-  </div>
-
-  <div class="show__btn">
-    <%= link_to " Delete ❌ ", passenger_path(@passenger.id), method: :delete, data: { confirm: '❗️ Would you like to delete the passenger?'}, class: 'show__delete-btn' %>
+  <div class="passengers__show__btn">
+    <%= link_to "E D I T ✏️  ", edit_passenger_path(@passenger.id), class: 'passengers__show__edit-btn' %>
+    <%= link_to " Delete ❌ ", passenger_path(@passenger), method: :delete, data: { confirm: '❗️ Would you like to delete the passenger?'}, class: 'passengers__show__delete-btn' %>
+    <%= link_to " A D D ➕ ", new_trip_path, class: 'passengers__show__add-btn' %>
   </div>
 </section>
 
@@ -29,8 +27,8 @@
 
 <%# reference: https://codepen.io/nikhil8krishnan/pen/WvYPvv %>
 <section>
-  <h4 class="show__trip-title"><%= @passenger.name  %>'s Trips</h4>
-  <div class="tbl-header show__background">
+  <h4 class="passengers__show__trip-title"><%= @passenger.name  %>'s Trips</h4>
+  <div class="tbl-header passengers__show__background">
     <table cellpadding="0" cellspacing="0" border="0">
       <thead>
         <tr>
@@ -50,7 +48,7 @@
         
           <% @passenger.trips.each do |trip| %>
             <tr>
-              <td><%= trip.id %></td>
+              <td><%= link_to trip.id, trip_path(trip) %></td>
               <td><%= trip.date %></td>
               <td><%= link_to trip.passenger.name, passenger_path(trip.passenger) %></td>
               <td><%= link_to trip.driver.name, driver_path(trip.driver) %></td>

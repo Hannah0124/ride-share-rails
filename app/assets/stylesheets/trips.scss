@@ -15,8 +15,8 @@
 }
 
 
-.show__title {
-  margin-top: 40px;
+.trips__show__title {
+  margin-top: 50px;
   margin-bottom: 30px;
 }
 
@@ -28,7 +28,7 @@
   margin: 0px;
 }
 
-.show__div-container p {
+.trips__show__div-container p {
   margin-top: 20px;
   margin-bottom: 20px;
   font-size: 15px;
@@ -36,7 +36,7 @@
 }
 
 
-.show__trip-title {
+.trips__show__trip-title {
   text-align: center;
   margin-bottom: 20px;
 }
@@ -100,17 +100,18 @@
   font-size: 18px;
 }
 
-.show__btn {
-  display: flex;
-}
-
-
-.show__edit-btn {
-  margin-bottom: 10px; 
+.trips__show__btn {
   margin-top: 20px;
+  display: flex;
+  flex-direction: row;
 }
 
-.show__edit-btn, .show__delete-btn {
+
+.trips__show__edit-btn {
+  margin-right: 10px;
+}
+
+.trips__show__edit-btn, .trips__show__delete-btn {
   border-radius: 10px;
   border: #25B7C2 solid 3px;
   color: #25B7C2;
@@ -118,7 +119,7 @@
   padding: 5px 5px;
 }
 
-._form__trip-btn:hover, .show__edit-btn:hover, .show__delete-btn:hover {
+._form__trip-btn:hover, .trips__show__edit-btn:hover, .trips__show__delete-btn:hover {
   letter-spacing: 0.1rem;
   font-weight: bold;
   color: #25B7C2;

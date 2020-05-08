@@ -1,35 +1,32 @@
 <section class="drivers__show__conatiner">
-  <h3 class="show__title">About Driver</h3>
-  <div class="show__div-container">
+  <h3 class="drivers__show__title">About Driver</h3>
+  <div class="drivers__show__div-container">
     <%= image_tag "http://www.thispersondoesnotexist.com/image", alt: "profile-photo", class: "drivers__show__profile-image" %>
     <p>
-      <span class="show__detail-title">Name:</span>
+      <span class="drivers__show__detail-title">Name:</span>
       <%= @driver[:name] %>
     </p>
     <p>
-      <span class="show__detail-title">VIN:</span>
+      <span class="drivers__show__detail-title">VIN:</span>
       <%= @driver[:vin] %>
     </p>
     <p>
-      <span class="show__detail-title">Available:</span>
-      <%= @driver[:available] %>
+      <span class="drivers__show__detail-title">Available:</span>
+      <%= @driver[:available] ? "available" : "not available" %>
     </p>
     <p>
-      <span class="show__detail-title">Total Earnings:</span>
+      <span class="drivers__show__detail-title">Total Earnings:</span>
       $ <%= @driver.total_earnings %>
     </p>
     <p>
-      <span class="show__detail-title">Average Rating:</span>
+      <span class="drivers__show__detail-title">Average Rating:</span>
       ⭐️<strong><%= @driver.average_rating %></strong> / 5
     </p>
   </div>
 
-  <div class="show__btn">
-    <%= link_to "E D I T ✏️  ", edit_driver_path(@driver.id), class: 'show__edit-btn' %>
-  </div>
-
-  <div class="show__btn">
-    <%= link_to " Delete ❌ ", driver_path(@driver.id), method: :delete, data: { confirm: '❗️ Would you like to delete the driver?'}, class: 'show__delete-btn' %>
+  <div class="drivers__show__btn">
+    <%= link_to "E D I T ✏️  ", edit_driver_path(@driver.id), class: 'drivers__show__edit-btn' %>
+    <%= link_to " Delete ❌ ", driver_path(@driver.id), method: :delete, data: { confirm: '❗️ Would you like to delete the driver?'}, class: 'drivers__show__delete-btn' %>
   </div>
 </section>
 
@@ -37,8 +34,8 @@
 
 <%# reference: https://codepen.io/nikhil8krishnan/pen/WvYPvv %>
 <section>
-  <h4 class="show__trip-title"><%= @driver.name %>'s Trips</h4>
-  <div class="tbl-header show__background">
+  <h4 class="drivers__show__trip-title"><%= @driver.name %>'s Trips</h4>
+  <div class="tbl-header drivers__show__background">
     <table cellpadding="0" cellspacing="0" border="0">
       <thead>
         <tr>
@@ -58,7 +55,7 @@
         
           <% @driver.trips.each do |trip| %>
             <tr>
-              <td><%= trip.id %></td>
+              <td><%= link_to trip.id, trip_path(trip) %></td>
               <td><%= trip.date %></td>
               <td><%= link_to trip.passenger.name, passenger_path(trip.passenger) %></td>
               <td><%= link_to trip.driver.name, driver_path(trip.driver) %></td>
