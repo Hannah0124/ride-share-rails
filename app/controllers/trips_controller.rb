@@ -14,9 +14,20 @@ class TripsController < ApplicationController
     @trip = Trip.new
   end
 
-  def create
+
+  def create 
+    # raise
     @trip = Trip.new(trip_params)
-  end 
+
+    if @trip.save
+      redirect_to trip_path(@trip.id)
+      return 
+    else 
+      render :new, :bad_request 
+      return 
+    end 
+  end
+
 
   def edit 
     trip_id = params[:id]
@@ -63,7 +74,7 @@ class TripsController < ApplicationController
   private 
 
   def trip_params 
-    return params.require(:trip).permit( :driver_id, :passenger_id, :date, :rating, :cost)
+    return params.require(:trip).permit(:driver_id, :passenger_id, :date, :rating, :cost)
   end
 end
 

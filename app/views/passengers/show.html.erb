@@ -17,9 +17,9 @@
   </div>
 
   <div class="passengers__show__btn">
+    <%= link_to " Request Ride➕ ", new_trip_path, class: 'passengers__show__request-ride-btn' %>
     <%= link_to "E D I T ✏️  ", edit_passenger_path(@passenger.id), class: 'passengers__show__edit-btn' %>
     <%= link_to " Delete ❌ ", passenger_path(@passenger), method: :delete, data: { confirm: '❗️ Would you like to delete the passenger?'}, class: 'passengers__show__delete-btn' %>
-    <%= link_to " A D D ➕ ", new_trip_path, class: 'passengers__show__add-btn' %>
   </div>
 </section>
 
