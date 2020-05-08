@@ -54,7 +54,7 @@ describe DriversController do
       get "/drivers/#{invalid_id}"
 
       # Assert
-      must_respond_with :not_found
+      must_respond_with :redirect
 
     end
   end
@@ -85,7 +85,7 @@ describe DriversController do
 
       # Assert
       # Find the newly created Driver, and check that all its attributes match what was given in the form data
-      driver = Driver.first
+      driver = Driver.last
       expect(driver.name).must_equal driver_hash[:driver][:name]
       expect(driver.vin).must_equal driver_hash[:driver][:vin]
       # Check that the controller redirected the user
@@ -188,7 +188,7 @@ describe DriversController do
 
       # Assert
       # Check that the controller gave back a 404
-      must_respond_with :not_found
+      must_respond_with :redirect
 
     end
 

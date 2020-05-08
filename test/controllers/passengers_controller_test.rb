@@ -52,7 +52,7 @@ describe PassengersController do
       get "/passengers/#{invalid_id}"
 
       # Assert
-      must_respond_with :not_found
+      must_respond_with :redirect
 
     end
   end

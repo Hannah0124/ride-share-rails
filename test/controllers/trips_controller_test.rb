@@ -5,7 +5,7 @@ describe TripsController do
   before do
     @driver = Driver.create(name: "Yoyo", vin: "12345")
     @passenger = Passenger.create(name: "Hannah", phone_num: "1234567890")
-    @trip = Trip.create(passenger_id: @passenger.id)
+    @trip = Trip.create(passenger_id: @passenger.id) # fill in params
   end
  
   describe "show" do
@@ -18,7 +18,7 @@ describe TripsController do
     it "will respond with not_found for invalid ids" do
       invalid_trip_id = -1
       get "/trips/#{invalid_trip_id}"
-      must_respond_with :not_found
+      must_respond_with :redirect
     end
   end
  
@@ -29,12 +29,12 @@ describe TripsController do
     
     trip_hash = { 
       trip: {
-        passenger_id: new_passenger.id
+        passenger_id: new_passenger.id # fill in params
       } 
     }
    
     it "can create a trip" do
-      expect {post trips_path, params: trip_hash}.must_differ 'Trip.count', 1
+      expect {post trips_path, params: trip_hash}.must_differ 'Trip.count', 1 # ActionController::ParameterMissing: param is missing or the value is empty: trip
   
       expect(Trip.last.passenger_id).must_equal trip_hash[:trip][:passenger_id]
 
@@ -46,7 +46,7 @@ describe TripsController do
         passenger_id: -1,    
       }
       expect {
-        post trips_path, params: trip_hash
+        post trips_path, params: trip_hash # ActionController::ParameterMissing: param is missing or the value is empty: trip
       }.wont_change "Trip.count"
       
       must_respond_with :redirect
@@ -89,7 +89,7 @@ describe TripsController do
       expect {
         patch trip_path(invalid_id), params: new_trip_hash
       }.wont_change "Trip.count"
-      must_respond_with :not_found
+      must_respond_with :redirect
     end
   end
  
