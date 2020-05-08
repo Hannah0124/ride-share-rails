@@ -7,10 +7,13 @@ describe DriversController do
     it "responds with success when there are many drivers saved" do
       # Arrange
       # Ensure that there is at least one Driver saved
+      Driver.create(name: "Yoyo", vin: 12345, available: true)
 
       # Act
+      get "/drivers"
 
       # Assert
+      must_respond_with :success
 
     end
 
@@ -19,8 +22,10 @@ describe DriversController do
       # Ensure that there are zero drivers saved
 
       # Act
+      get "/drivers"
 
       # Assert
+      must_respond_with :success
 
     end
   end
@@ -29,26 +34,35 @@ describe DriversController do
     it "responds with success when showing an existing valid driver" do
       # Arrange
       # Ensure that there is a driver saved
+      @driver = Driver.create(name: "Yoyo", vin: 12345, available: true)
 
       # Act
+      valid_trip_id = @driver.id
+      get driver_path(valid_trip_id)
 
       # Assert
+      must_respond_with :success
 
     end
 
     it "responds with 404 with an invalid driver id" do
       # Arrange
       # Ensure that there is an id that points to no driver
+      invalid_id = -1
 
       # Act
+      get "driver_path(invalid_id)"
 
       # Assert
+      must_respond_with :not_found
 
     end
   end
 
   describe "new" do
     it "responds with success" do
+      get new_driver_path
+      must_respond_with :success
     end
   end
 
