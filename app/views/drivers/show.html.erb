@@ -12,7 +12,7 @@
     </p>
     <p>
       <span class="drivers__show__detail-title">Available:</span>
-      <%= @driver[:available] ? "available" : "not available" %>
+      <%= @driver[:available] ? "available" : "unavailable" %>
     </p>
     <p>
       <span class="drivers__show__detail-title">Total Earnings:</span>
@@ -25,6 +25,7 @@
   </div>
 
   <div class="drivers__show__btn">
+    <%= link_to @driver.available ? "Mark Unavailable" : "Mark Available", toggle_available_path(@driver.id), class: 'drivers__show__mark-available-btn', method: :patch, data: { confirm: '❗️ Would you like to update your status?' } %>
     <%= link_to "E D I T ✏️  ", edit_driver_path(@driver.id), class: 'drivers__show__edit-btn' %>
     <%= link_to " Delete ❌ ", driver_path(@driver.id), method: :delete, data: { confirm: '❗️ Would you like to delete the driver?'}, class: 'drivers__show__delete-btn' %>
   </div>
