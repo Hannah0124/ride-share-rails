@@ -70,10 +70,6 @@ p {
 /* Giving a background-color to the nav container. */
 nav { 
 	margin:0;
-	padding-right: 50px;
-  // background-color: #254441;
-  // background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-  // background: linear-gradient(to right, #25c481, #25b7c4);
   background-color: #25B7C2;
 }
 
@@ -99,39 +95,41 @@ nav:after {
  * and adding "position:reltive" */
 nav ul {
 	float: right;
-	padding:0;
-	margin:0;
+	padding: 0;
+	margin: 0;
 	list-style: none;
 	position: relative;
 	}
 	
 /* Positioning the navigation items inline */
 nav ul li {
-	margin-right: 20px;
+	margin-right: 10px;
 	display: inline-block;
 	float: left;
-  // background-color: #254441;
-  background-color: #25B7C2;
-  // background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-  // background: linear-gradient(to right, #25c481, #25b7c4);
-  
+	background-color: #25B7C2;
 	}
 
 /* Styling the links */
 nav a {
-	display:block;
-	padding:14px 20px;	
+	display: block;
+	padding: 14px 20px;	
 	color:#FFF;
-	font-size:17px;
+	font-size: 17px;
 	text-decoration:none;
 }
 
 
-nav ul li ul li:hover { background: #3f3939cb; }
+nav ul li ul li:hover { 
+	background: #3f3939cb; 
+	color: white;
+	z-index: 2;
+}
 
 /* Background color change on Hover */
 nav a:hover { 
 	background-color: #3f3939cb; 
+	color: white;
+	z-index: 2;
 }
 
 /* Hide Dropdowns by Default
@@ -150,7 +148,6 @@ nav ul li:hover > ul {
 	
 /* Fisrt Tier Dropdown */
 nav ul ul li {
-  // width: 170px;
   width: 100%;
 	float:none;
 	display:list-item;
@@ -163,9 +160,9 @@ nav ul ul li {
 */
 nav ul ul ul li {
 	position: relative;
-	top:-60px;
+	top: -60px;
 	/* has to be the same number as the "width" of "nav ul ul li" */ 
-	left:170px; 
+	left: 170px; 
 }
 
 	
@@ -196,25 +193,29 @@ li > a:only-child:after { content: ''; }
 	.toggle + a,
 	.menu {
 		display: none;
+		width: 100%; 
+		margin: 0;
+		text-align: center;
 	}
 
 	/* Stylinf the toggle lable */
 	.toggle {
 		display: block;
 		// background-color: #254441;
-		padding:14px 20px;	
-		color:#FFF;
-		font-size:17px;
-		text-decoration:none;
-    border:none;
-    width: 100%;
-    // background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-    // background: linear-gradient(to right, #25c481, #25b7c4);
+		padding: 14px 20px;	
+		color: #FFF;
+		font-size: 17px;
+		text-decoration: none;
+    border: none;
+		width: 100%;
+		margin: 0;
+		text-align: center;
+		cursor: pointer;
 	}
 
 	.toggle:hover {
     background-color: #3f3939cb;
-    width: 100%;
+		width: 100%;
 	}
 
 	/* Display Dropdown when clicked on Parent Lable */
@@ -244,8 +245,8 @@ li > a:only-child:after { content: ''; }
   
 	nav ul li ul li .toggle,
 	nav ul ul a,
-  nav ul ul ul a{
-		padding:14px 20px;	
+  nav ul ul ul a {
+		padding: 14px 20px;	
 		color:#FFF;
 		font-size:17px; 
 	}
@@ -259,7 +260,7 @@ li > a:only-child:after { content: ''; }
 	/* Hide Dropdowns by Default */
 	nav ul ul {
 		float: none;
-		position:static;
+		position: static;
 		color: #ffffff;
 		/* has to be the same number as the "line-height" of "nav a" */
 	}
@@ -267,7 +268,8 @@ li > a:only-child:after { content: ''; }
 	/* Hide menus on hover */
 	nav ul ul li:hover > ul,
 	nav ul li:hover > ul {
-		display: none;
+		display: block;
+		// z-index: 3;
 	}
 		
 	/* Fisrt Tier Dropdown */
@@ -279,9 +281,24 @@ li > a:only-child:after { content: ''; }
 	nav ul ul ul li {
 		position: static;
 		/* has to be the same number as the "width" of "nav ul ul li" */ 
-
 	}
+}
 
+
+footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	font-size: 15px;
+	line-height: 15px;
+	width: 100%;
+	background-color: #fff;
+	opacity: 0.8;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 0;
+	z-index: 2;
+	height: 35px;
 }
 
 @media all and (max-width : 330px) {
@@ -290,5 +307,5 @@ li > a:only-child:after { content: ''; }
 		display:block;
 		width: 94%;
 	}
-
 }
+

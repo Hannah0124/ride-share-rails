@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-
   root to: "homepages#index"  # root_path
-  resources :drivers
+  patch '/drivers/:id/toggle_available', to: 'drivers#toggle_available', as: 'toggle_available'
+  resources :drivers  
   resources :passengers
   resources :trips
   
-
+  
+  
   # root to: "trips#index"
 
   # get '/trips', to: 'trips#index', as: 'trips'
@@ -23,29 +24,3 @@ Rails.application.routes.draw do
   # delete '/trips/:id', to: 'trips#destroy'
 
 end
-
-
-# rails new . 
-
-# Bundle install 
-
-# Rails db:create
-
-# Rails s  => working! 
-
-# rails db:migrate
-
-# Update routes (restful routes) 
-
-# rails generate controller Homepages
-
-# rails generate controller Trips
-# => update controller
-
-#  touch app/views/homepages/index.html.erb (terminal)
-# Update index.html.erb
-
-
-# rails generate model Trip date:string rating:integer cost:float
-# rails db:migrate
-

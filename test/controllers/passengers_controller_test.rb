@@ -5,7 +5,7 @@ describe PassengersController do
     it "responds with success when there are many passengers saved" do
       # Arrange
       # Ensure that there is at least one Passenger saved
-      Passenger.create(name: "Hannah", phone_num: 1234567890)
+      Passenger.create(name: "Hannah", phone_num: "1234567890")
 
       # Act
       get "/passengers"
@@ -32,11 +32,11 @@ describe PassengersController do
     it "responds with success when showing an existing valid passenger" do
       # Arrange
       # Ensure that there is a passenger saved
-      passenger = Passenger.create(name: "Hannah", phone_num: 1234567890)
+      passenger = Passenger.create(name: "Hannah", phone_num: "1234567890")
 
       # Act
       valid_id = passenger.id
-      get "/passengers/#{valid_trip_id}"
+      get "/passengers/#{valid_id}"
 
       # Assert
       must_respond_with :success
@@ -71,7 +71,7 @@ describe PassengersController do
       passenger_hash = {
         passenger: {
           name: "Hannah", 
-          phone_num: 1234567890
+          phone_num: "1234567890"
         }
       }
       # Act-Assert
@@ -96,7 +96,7 @@ describe PassengersController do
     it "responds with success when getting the edit page for an existing, valid passenger" do
       # Arrange
       # Ensure there is an existing passenger saved
-      passenger = Passenger.create(name: "Hannah", phone_num: 1234567890)
+      passenger = Passenger.create(name: "Hannah", phone_num: "1234567890")
 
       # Act
       get edit_passenger_path(passenger.id)
@@ -126,13 +126,13 @@ describe PassengersController do
       # Ensure there is an existing passenger saved
       # Assign the existing passenger's id to a local variable
       # Set up the form data
-      passenger = Passenger.create(name: "Hannah", phone_num: 1234567890)
+      passenger = Passenger.create(name: "Hannah", phone_num: "1234567890")
       passenger_id = passenger.id
 
       update_hash = {
         passenger: {
           name: "Hannah J", 
-          phone_num: 1234567890
+          phone_num: "1234567890"
         }
       }
 
@@ -144,8 +144,8 @@ describe PassengersController do
 
       # Assert
       # Use the local variable of an existing passenger's id to find the passenger again, and check that its attributes are updated
-      expect(passenger.find_by(id: passenger_id).name).must_equal update_hash[passenger][:name]
-      expect(passenger.find_by(id: passenger_id).phone_num).must_equal update_hash[passenger][:phone_num]
+      expect(Passenger.find_by(id: passenger_id).name).must_equal update_hash[passenger][:name] # not working
+      expect(Passenger.find_by(id: passenger_id).phone_num).must_equal update_hash[passenger][:phone_num]
       # Check that the controller redirected the user
       must_redirect_to passengers_path(passenger_id)
 
@@ -160,7 +160,7 @@ describe PassengersController do
       update_hash = {
         passenger: {
           name: "Hannah J", 
-          phone_num: 1234567890
+          phone_num: "1234567890"
         }
       }
 
@@ -181,13 +181,13 @@ describe PassengersController do
     it "destroys the passenger instance in db when passenger exists, then redirects" do
       # Arrange
       # Ensure there is an existing passenger saved
-      passenger = Passenger.create(name: "Hannah", phone_num: 1234567890)
+      passenger = Passenger.create(name: "Hannah", phone_num: "1234567890")
 
       # Act-Assert
       # Ensure that there is a change of -1 in passenger.count
       expect {
         delete passenger_path(passenger.id)
-      }.must_differ 'passenger.count', -1
+      }.must_differ 'Passenger.count', -1
 
       # Assert
       # Check that the controller redirects
@@ -204,7 +204,7 @@ describe PassengersController do
       # Ensure that there is no change in passenger.count
       expect {
         delete passenger_path(invalid_id)
-      }.must_differ 'passenger.count', 0
+      }.must_differ 'Passenger.count', 0
 
       # Assert
       # Check that the controller responds or redirects with whatever your group decides

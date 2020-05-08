@@ -1,0 +1,24 @@
+<%= form_with model: @trip, class: '_form__container' do |f| %>
+  <p class="_form_instruction">Please provide the following information to <%= action_name %> the trips to our database:</p>
+
+  <div class="_form-text-container">
+  
+    <div class="_form">
+      <%# TODO %>
+      <%# f.label :date class: "_form__label" %>
+      <%# f.text_field :date class: "_form__text_field" %>
+    </div>
+
+    <div class="_form">
+      <%= f.label :rating, class: "_form__label" %>
+      <%= f.text_field :rating, class: "_form__text_field" %>
+    </div>
+
+    <div class="_form">
+      <%= f.label :cost, class: "_form__label" %>
+      <%= f.text_field :cost, class: "_form__text_field" %>
+    </div>
+  </div>
+
+  <%= f.submit action_name, class: "_form__trip-btn" %>
+<% end %>

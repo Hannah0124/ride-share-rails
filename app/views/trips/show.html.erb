@@ -1,0 +1,32 @@
+<section class="trips__show__conatiner">
+  <h3 class="trips__show__title">Trip History</h3>
+  <div class="trips__show__div-container">
+    <p>
+      <span class="trips__show__detail-title">Trip ID:</span>
+      <%= @trip[:id] %>
+    </p>
+    <p>
+      <span class="trips__show__detail-title">Passenger Name:</span>
+      <%= link_to @trip.passenger.name, passenger_path(@trip.passenger) %>
+    </p>
+    <p>
+      <span class="trips__show__detail-title">Driver Name:</span>
+      <%= link_to @trip.driver.name, driver_path(@trip.driver) %>
+    </p>
+    <p>
+      <span class="trips__show__detail-title">Trip Cost:</span>
+      $<%= @trip[:cost] %>
+    </p>
+    <p>
+      <span class="trips__show__detail-title">Trip Rating:</span>
+      ⭐️<%= @trip[:rating] %>
+    </p>
+  </div>
+
+  <div class="trips__show__btn">
+    <%= link_to "E D I T ✏️  ", edit_trip_path(@trip.id), class: 'trips__show__edit-btn' %>
+    <%= link_to " Delete ❌ ", trip_path(@trip.id), method: :delete, data: { confirm: '❗️ Would you like to delete the trip?'}, class: 'trips__show__delete-btn' %>
+  </div>
+</section>
+
+

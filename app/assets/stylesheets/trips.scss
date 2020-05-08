@@ -1,3 +1,126 @@
 // Place all the styles related to the Trips controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+// @import "bootstrap";
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+
+
+.trips__index__main {
+  padding-top: 20px;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+.trips__show__title {
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.trips__show__conatiner, .trips__index__conatiner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+}
+
+.trips__show__div-container p {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  line-height: 10px;
+}
+
+
+.trips__show__trip-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+// new and edit page
+.new__title, .edit__title {
+  text-align: center;
+  margin: 30px 0;
+}
+
+._form__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+._form-text-container {
+  margin-top: 20px;
+}
+
+._form__text_field {
+  width: 300px;
+  font-size: 18px; 
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  border: 0;
+  background-color: rgb(250, 248, 248);
+  border-radius: 5px;
+}
+
+._form__text_field::before {
+  margin-left: 20px;
+}
+
+._form_instruction {
+  color: gray;
+  font-size: 18px;
+}
+
+._form {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+._form__label {
+  font-size: 20px;
+}
+
+._form__trip-btn {
+  padding: 5px 20px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: #25B7C2 solid 3px;
+  color: #25B7C2;
+  background-color: transparent;
+  font-size: 18px;
+}
+
+.trips__show__btn {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+
+.trips__show__edit-btn {
+  margin-right: 10px;
+}
+
+.trips__show__edit-btn, .trips__show__delete-btn {
+  border-radius: 10px;
+  border: #25B7C2 solid 3px;
+  color: #25B7C2;
+  font-size: 18px;
+  padding: 5px 5px;
+}
+
+._form__trip-btn:hover, .trips__show__edit-btn:hover, .trips__show__delete-btn:hover {
+  letter-spacing: 0.1rem;
+  font-weight: bold;
+  color: #25B7C2;
+}

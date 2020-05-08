@@ -1,5 +1,49 @@
 // Place all the styles related to the Homepages controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.homepages__index-container {
+  background-image: url("rideshare.jpg");
+  background-color: #cccccc;
+  // position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
 
 
+.homepages__index-drivers, .homepages__index-passengers {
+  width: 100%;
+  line-height: 500px;
+  font-size: 40px;
+  text-align: center;
+  // reference(shadow): https://codepen.io/juanbrujo/pen/yGpAK
+  letter-spacing: .1em;
+  text-shadow: 0 22px 30px rgba(0, 0, 0, 0.9);
+}
+
+.homepages__index-drivers > a, .homepages__index-passengers > a {
+  color: #fff;
+}
+
+@media only screen and (max-width: 879px) {  
+  .homepages__index-drivers {
+    background-image: url("driver.jpg");
+  }
+  
+  .homepages__index-passengers {
+    background-image: url("passenger.jpg");
+  }
+
+  .homepages__index-drivers, .homepages__index-passengers {
+    font-size: 30px;
+    width: 100%;
+    height: 100%;
+    color: white;
+    background-repeat: no-repeat; 
+    background-size: cover;
+    margin: 0px;
+  }
+}

@@ -7,7 +7,7 @@ describe DriversController do
     it "responds with success when there are many drivers saved" do
       # Arrange
       # Ensure that there is at least one Driver saved
-      Driver.create(name: "Yoyo", vin: 12345)
+      Driver.create(name: "Yoyo", vin: "12345")
 
       # Act
       get "/drivers"
@@ -34,7 +34,7 @@ describe DriversController do
     it "responds with success when showing an existing valid driver" do
       # Arrange
       # Ensure that there is a driver saved
-      driver = Driver.create(name: "Yoyo", vin: 12345)
+      driver = Driver.create(name: "Yoyo", vin: "12345")
 
       # Act
       valid_id = driver.id
@@ -73,7 +73,7 @@ describe DriversController do
       driver_hash = {
         driver: {
           name: "Yoyo", 
-          vin: 12345
+          vin: "12345"
         }
       }
       # Act-Assert
@@ -111,7 +111,7 @@ describe DriversController do
     it "responds with success when getting the edit page for an existing, valid driver" do
       # Arrange
       # Ensure there is an existing driver saved
-      driver = Driver.create(name: "Yoyo", vin: 12345)
+      driver = Driver.create(name: "Yoyo", vin: "12345")
 
       # Act
       get edit_driver_path(driver.id)
@@ -141,13 +141,13 @@ describe DriversController do
       # Ensure there is an existing driver saved
       # Assign the existing driver's id to a local variable
       # Set up the form data
-      driver = Driver.create(name: "Yoyo", vin: 12345)
+      driver = Driver.create(name: "Yoyo", vin: "12345")
       driver_id = driver.id
 
       update_hash = {
         driver: {
           name: "Yo-Yo",
-          vin: 12345
+          vin: "12345"
         }
       }
 
@@ -159,7 +159,7 @@ describe DriversController do
 
       # Assert
       # Use the local variable of an existing driver's id to find the driver again, and check that its attributes are updated
-      expect(Driver.find_by(id: driver_id).name).must_equal update_hash[driver][:name]
+      expect(Driver.find_by(id: driver_id).name).must_equal update_hash[driver][:name] # NoMethodError: undefined method `[]' for nil:NilClass
       expect(Driver.find_by(id: driver_id).vin).must_equal update_hash[driver][:vin]
       # Check that the controller redirected the user
       must_redirect_to drivers_path(driver_id)
@@ -175,7 +175,7 @@ describe DriversController do
       update_hash = {
         driver: {
           name: "Yo-Yo",
-          vin: 12345
+          vin: "12345"
         }
       }
 
@@ -211,7 +211,7 @@ describe DriversController do
     it "destroys the driver instance in db when driver exists, then redirects" do
       # Arrange
       # Ensure there is an existing driver saved
-      driver = Driver.create(name: "Yoyo", vin: 12345)
+      driver = Driver.create(name: "Yoyo", vin: "12345")
 
       # Act-Assert
       # Ensure that there is a change of -1 in Driver.count

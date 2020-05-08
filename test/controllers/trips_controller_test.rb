@@ -1,27 +1,25 @@
 require "test_helper"
  
 describe TripsController do
- before do
-   # Driver.create()
-   # Passenger.create()
- end
+  before do
+    driver = Driver.create(name: "Yoyo", vin: "12345")
+    passenger = Passenger.create(name: "Hannah", phone_num: "1234567890")
+    trip = Trip.create(passenger_id: passenger.id)
+  end
  
- describe "show" do
-   before do
-     # @trip = Trip.first
-   end
-  
-   it "will get show for valid ids" do
-     # valid_trip_id = @trip.id
-     # get "/trips/#{valid_trip_id}"
-     # must_respond_with : success
-   end
- 
-   it "will respond with not_found for invalid ids" do
-     # invalid_trip_id = -1
-     # must_respond_with :not_found
-   end
- end
+  describe "show" do
+    it "will get show for valid ids" do
+      valid_trip_id = trip.id # not working
+      get "/trips/#{valid_trip_id}"
+      must_respond_with :success
+    end
+   
+    it "will respond with not_found for invalid ids" do
+      invalid_trip_id = -1
+      get "/trips/#{invalid_trip_id}" # no show action yet
+      must_respond_with :not_found
+    end
+  end
  
  describe "create" do
    # let (:driver_name) {
