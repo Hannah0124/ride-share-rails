@@ -155,7 +155,7 @@ describe DriversController do
       # Ensure that there is no change in Driver.count
       expect {
         patch driver_path(driver_id), params: update_hash
-      }.must_differ 'Driver.count', 0
+      }.wont_change 'Driver.count'
 
       # Assert
       # Use the local variable of an existing driver's id to find the driver again, and check that its attributes are updated
@@ -184,7 +184,7 @@ describe DriversController do
       # Ensure that there is no change in Driver.count
       expect {
         patch driver_path(invalid_id), params: update_hash
-      }.must_differ 'Driver.count', 0
+      }.wont_change 'Driver.count'
 
       # Assert
       # Check that the controller gave back a 404
@@ -235,7 +235,7 @@ describe DriversController do
       # Ensure that there is no change in Driver.count
       expect {
         delete driver_path(invalid_id)
-      }.must_differ 'Driver.count', 0
+      }.wont_change 'Driver.count'
 
       # Assert
       # Check that the controller responds or redirects with whatever your group decides

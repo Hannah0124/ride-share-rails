@@ -140,7 +140,7 @@ describe PassengersController do
       # Ensure that there is no change in passenger.count
       expect {
         patch passenger_path(passenger_id), params: update_hash
-      }.must_differ 'Passenger.count', 0
+      }.wont_change 'Passenger.count'
 
       # Assert
       # Use the local variable of an existing passenger's id to find the passenger again, and check that its attributes are updated
@@ -169,7 +169,7 @@ describe PassengersController do
       # Ensure that there is no change in passenger.count
       expect {
         patch passenger_path(invalid_id), params: update_hash
-      }.must_differ 'Passenger.count', 0
+      }.wont_change 'Passenger.count'
 
       # Assert
       # Check that the controller gave back a 404
@@ -205,7 +205,7 @@ describe PassengersController do
       # Ensure that there is no change in passenger.count
       expect {
         delete passenger_path(invalid_id)
-      }.must_differ 'Passenger.count', 0
+      }.wont_change 'Passenger.count'
 
       # Assert
       # Check that the controller responds or redirects with whatever your group decides
