@@ -80,7 +80,7 @@ describe DriversController do
       # Ensure that there is a change of 1 in Driver.count
       expect {
         post drivers_path, params: driver_hash
-      }.must_differ 'Driver.count', 1 # not working
+      }.must_differ 'Driver.count', 1
       
 
       # Assert
@@ -159,10 +159,11 @@ describe DriversController do
 
       # Assert
       # Use the local variable of an existing driver's id to find the driver again, and check that its attributes are updated
-      expect(Driver.find_by(id: driver_id).name).must_equal update_hash[driver][:name] # NoMethodError: undefined method `[]' for nil:NilClass
-      expect(Driver.find_by(id: driver_id).vin).must_equal update_hash[driver][:vin]
+      updated_driver = Driver.find_by(id: driver_id)
+      expect(updated_driver.name).must_equal update_hash[:driver][:name] # NoMethodError: undefined method `[]' for nil:NilClass
+      expect(updated_driver.vin).must_equal update_hash[:driver][:vin]
       # Check that the controller redirected the user
-      must_redirect_to drivers_path(driver_id)
+      must_respond_with :redirect
 
     end
 

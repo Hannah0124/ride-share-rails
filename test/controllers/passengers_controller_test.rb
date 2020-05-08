@@ -78,7 +78,7 @@ describe PassengersController do
       # Ensure that there is a change of 1 in passenger.count
       expect {
         post passengers_path, params: passenger_hash
-      }.must_differ 'Passenger.count', 1 # not working
+      }.must_differ 'Passenger.count', 1
       
 
       # Assert
@@ -144,10 +144,11 @@ describe PassengersController do
 
       # Assert
       # Use the local variable of an existing passenger's id to find the passenger again, and check that its attributes are updated
-      expect(Passenger.find_by(id: passenger_id).name).must_equal update_hash[passenger][:name] # not working
-      expect(Passenger.find_by(id: passenger_id).phone_num).must_equal update_hash[passenger][:phone_num]
+      updated_passenger = Passenger.find_by(id: passenger_id)
+      expect(updated_passenger.name).must_equal update_hash[:passenger][:name] # not working
+      expect(updated_passenger.phone_num).must_equal update_hash[:passenger][:phone_num]
       # Check that the controller redirected the user
-      must_redirect_to passengers_path(passenger_id)
+      must_respond_with :redirect
 
     end
 
