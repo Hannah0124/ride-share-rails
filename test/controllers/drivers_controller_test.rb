@@ -37,8 +37,8 @@ describe DriversController do
       driver = Driver.create(name: "Yoyo", vin: 12345)
 
       # Act
-      valid_trip_id = driver.id
-      get "/drivers/#{valid_trip_id}"
+      valid_id = driver.id
+      get "/drivers/#{valid_id}"
 
       # Assert
       must_respond_with :success
@@ -88,7 +88,6 @@ describe DriversController do
       driver = Driver.first
       expect(driver.name).must_equal driver_hash[:driver][:name]
       expect(driver.vin).must_equal driver_hash[:driver][:vin]
-      expect(driver.available).must_equal driver_hash[:driver][:available]
       # Check that the controller redirected the user
       must_redirect_to driver_path(Driver.find_by(name: "Yoyo").id)
 
