@@ -1,7 +1,11 @@
 <section class="passengers__show__conatiner">
-  <h3 class="show__title">About <%= @passenger[:name] %></h3>
+  <h3 class="show__title">About Passenger</h3>
   <div class="show__div-container">
     <%= image_tag "http://www.thispersondoesnotexist.com/image", alt: "profile-photo", class: "passengers__show__profile-image" %>
+    <p>
+      <span class="show__detail-title">Name:</span>
+      <%= @passenger[:name] %>
+    </p>
     <p>
       <span class="show__detail-title">Phone Number:</span>
       <%= @passenger[:phone_num] %>
@@ -25,7 +29,7 @@
 
 <%# reference: https://codepen.io/nikhil8krishnan/pen/WvYPvv %>
 <section>
-  <h1><%= @passenger.name %>'s Trips</h1>
+  <h4 class="show__trip-title"><%= @passenger.name  %>'s Trips</h4>
   <div class="tbl-header show__background">
     <table cellpadding="0" cellspacing="0" border="0">
       <thead>
