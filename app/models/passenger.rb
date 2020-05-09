@@ -8,6 +8,9 @@ class Passenger < ApplicationRecord
     return self.trips.sum { |trip| p trip.cost.to_f }.round(2)
   end
 
+  def sorted_trips_by_date # descending order 
+    return self.trips.order(date: :desc).all
+  end
 end
 
   # reference: https://github.com/jenseng/immigrant/issues/31

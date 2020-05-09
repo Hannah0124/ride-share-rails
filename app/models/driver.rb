@@ -18,6 +18,14 @@ class Driver < ApplicationRecord
     
     return (total_rating / length).round(1)
   end
+
+  def self.find_available_drivers 
+    return Driver.find_by(available: true)
+  end
+
+  def sorted_trips_by_date # descending order 
+    return self.trips.order(date: :desc).all
+  end
 end
 
 

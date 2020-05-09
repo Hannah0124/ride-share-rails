@@ -11,20 +11,39 @@ class TripsController < ApplicationController
   end 
 
   def new 
-    @trip = Trip.new
+    if params[:passenger_id] 
+      passenger = Passenger.find_by(id: params[:passenger_id])
+      @trip = passenger.trips.new 
+    else 
+      @trip = Trip.new
+    end 
   end
 
 
   def create 
     # raise
-    @trip = Trip.new(trip_params)
+    passenger = Passenger.find_by(id: params[:passenger_id])
 
-    if @trip.save
-      redirect_to trip_path(@trip.id)
-      return 
+    if passenger.nil? 
+      redirect_to passengers_path
     else 
-      render :new, :bad_request 
-      return 
+      trip_data = Trip.connect_trip
+      # @trip = Trip.new(trip_data)
+
+      @trip = Trip.new({
+        driver_id: trip_data[:driver_id],
+        passenger_id: passenger.id,
+        date: trip_data[:date],
+        cost: trip_data[:cost]
+      })
+
+      if @trip.save
+        redirect_to passenger_path(passenger)
+        return 
+      else 
+        render :new
+        return 
+      end 
     end 
   end
 
@@ -40,6 +59,7 @@ class TripsController < ApplicationController
   end 
 
   def update 
+
     trip_id = params[:id]
     @trip = Trip.find_by(id: trip_id) 
 
@@ -52,7 +72,7 @@ class TripsController < ApplicationController
       return 
 
     else 
-      render :edit, :bad_request
+      render :edit
       return 
     end
   end
@@ -66,7 +86,7 @@ class TripsController < ApplicationController
       return 
     else 
       @trip.destroy 
-      redirect_to trips_path 
+      redirect_to passenger_path(@trip.passenger_id)
       return 
     end
   end

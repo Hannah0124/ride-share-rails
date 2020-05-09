@@ -3,11 +3,15 @@ Rails.application.routes.draw do
 
   root to: "homepages#index"  # root_path
   patch '/drivers/:id/toggle_available', to: 'drivers#toggle_available', as: 'toggle_available'
-  resources :drivers  
+
   resources :passengers
+  resources :drivers  
   resources :trips
-  
-  
+
+  resources :passengers do 
+    resources :trips, only: [:create, :update]
+  end
+
   
   # root to: "trips#index"
 
