@@ -1,8 +1,11 @@
 class Driver < ApplicationRecord
   has_many :trips, dependent: :destroy
 
+  validates :name, presence: true, format: { with: /\A[a-zA-Z\'\s]+\z/ }
+  validates :vin, presence: true, length: { is: 17 }
+
   def total_earnings 
-    # The driver gets 80% of the trip cost after a fee of $1.65 is subtracted
+    return 0.00 if self.trips.length < 1
     return self.trips.sum { |trip| (trip.cost.to_f - 1.65) * 0.8 }    
   end
 
@@ -17,4 +20,6 @@ class Driver < ApplicationRecord
   end
 end
 
- # reference: https://github.com/jenseng/immigrant/issues/31
+
+# reference (dependent): https://github.com/jenseng/immigrant/issues/31
+# reference (validation): https://guides.rubyonrails.org/active_record_validations.html#length
