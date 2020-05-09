@@ -83,7 +83,7 @@ describe PassengersController do
 
       # Assert
       # Find the newly created passenger, and check that all its attributes match what was given in the form data
-      passenger = Passenger.first
+      passenger = Passenger.last
       expect(passenger.name).must_equal passenger_hash[:passenger][:name]
       expect(passenger.phone_num).must_equal passenger_hash[:passenger][:phone_num]
       # Check that the controller redirected the user
