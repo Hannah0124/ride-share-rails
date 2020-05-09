@@ -203,3 +203,26 @@ td {
   font-weight: bold;
   color: #25B7C2;
 }
+
+.passengers__show__back-btn, .passengers__form__back-btn {
+  margin-right: 10px;
+  font-size: 28px; 
+}
+
+
+.passengers__show__back-btn:hover, .passengers__form__back-btn:hover {
+  color: #25B7C2;
+}
+
+.red {
+  color: darkred;
+}
+
+.gray-letter {
+  color: gray;
+  text-align: right;
+}
+
+.select-box {
+  font-size: 15px;
+}

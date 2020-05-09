@@ -1,2 +1,5 @@
-<h2 class="edit__title">Edit Passenger</h2>
+<h2 class="edit__title anchor">
+  <span><%= link_to "🔙", passenger_path(@passenger), class: 'passengers__form__back-btn' %></span>
+  Edit Passenger
+</h2>
 <%= render partial: "form", locals: { action_name: "edit" } %>

@@ -1,2 +1,5 @@
-<h2 class="new__title">Add Driver</h2>
+<h2 class="new__title">
+  <span><%= link_to "🔙", drivers_path, class: 'drivers__form__back-btn' %></span>
+  Add Driver
+</h2>
 <%= render partial: "form", locals: { action_name: "create" } %>

@@ -1,2 +1,5 @@
-<h2 class="new__title">Add Passenger</h2>
+<h2 class="new__title">
+  <span><%= link_to "🔙", passengers_path, class: 'passengers__form__back-btn' %></span>
+  Add Passenger
+</h2>
 <%= render partial: "form", locals: { action_name: "create" } %>

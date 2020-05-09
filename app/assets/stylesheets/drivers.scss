@@ -202,3 +202,22 @@ td {
   font-weight: bold;
   color: #25B7C2;
 }
+
+.drivers__show__back-btn, .drivers__form__back-btn {
+  margin-right: 10px;
+  font-size: 28px; 
+}
+
+
+.drivers__show__back-btn:hover, .drivers__form__back-btn:hover {
+  color: #25B7C2;
+}
+
+.red {
+  color: darkred;
+}
+
+.gray-letter {
+  color: gray;
+  text-align: right;
+}

@@ -1,5 +1,8 @@
 <section class="trips__show__conatiner">
-  <h3 class="trips__show__title">Trip History</h3>
+  <h3 class="trips__show__title">
+    <span><%= link_to "🔙", passenger_path(@trip.passenger), class: 'trips__show__back-btn' %></span>
+    <%= @trip.passenger.name %>'s Trips
+  </h3>
   <div class="trips__show__div-container">
     <p>
       <span class="trips__show__detail-title">Trip ID:</span>

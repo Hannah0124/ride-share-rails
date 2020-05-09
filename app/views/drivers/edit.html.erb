@@ -1,2 +1,5 @@
-<h2 class="edit__title">Edit Driver</h2>
+<h2 class="edit__title">
+  <span><%= link_to "🔙", driver_path(@driver), class: 'drivers__form__back-btn' %></span>
+  Edit Driver
+</h2>
 <%= render partial: "form", locals: { action_name: "edit" } %>

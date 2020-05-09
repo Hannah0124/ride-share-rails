@@ -1,5 +1,9 @@
 <section class="drivers__show__conatiner">
-  <h3 class="drivers__show__title">About Driver</h3>
+
+  <h3 class="drivers__show__title">
+    <span><%= link_to "🔙", drivers_path, class: 'drivers__show__back-btn' %></span>
+    About Driver
+  </h3>
   <div class="drivers__show__div-container">
     <%= image_tag "http://www.thispersondoesnotexist.com/image", alt: "profile-photo", class: "drivers__show__profile-image" %>
     <p>
@@ -36,6 +40,7 @@
 <%# reference: https://codepen.io/nikhil8krishnan/pen/WvYPvv %>
 <section>
   <h4 class="drivers__show__trip-title"><%= @driver.name %>'s Trips</h4>
+  <h6 class="gray-letter">order: sorted by date descending</h6>
   <div class="tbl-header drivers__show__background">
     <table cellpadding="0" cellspacing="0" border="0">
       <thead>
@@ -54,7 +59,7 @@
     <table cellpadding="0" cellspacing="0" border="0">
       <tbody>
         
-          <% @driver.trips.each do |trip| %>
+          <% @driver.sorted_trips_by_date.each do |trip| %>
             <tr>
               <td><%= link_to trip.id, trip_path(trip) %></td>
               <td><%= trip.date %></td>
