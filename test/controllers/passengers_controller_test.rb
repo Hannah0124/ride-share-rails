@@ -173,7 +173,7 @@ describe PassengersController do
 
       # Assert
       # Check that the controller gave back a 404
-      must_respond_with :not_found
+      must_respond_with :redirect
 
     end
   end

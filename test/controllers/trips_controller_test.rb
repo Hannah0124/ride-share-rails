@@ -5,7 +5,7 @@ describe TripsController do
   before do
     @driver = Driver.create(name: "Yoyo", vin: "12345")
     @passenger = Passenger.create(name: "Hannah", phone_num: "1234567890")
-    @trip = Trip.create(passenger_id: @passenger.id) # fill in params
+    @trip = Trip.create(driver_id: @driver.id, passenger_id: @passenger.id, date: Date.today, rating: 5, cost: 1234)
   end
  
   describe "show" do
@@ -29,12 +29,16 @@ describe TripsController do
     
     trip_hash = { 
       trip: {
-        passenger_id: new_passenger.id # fill in params
+        driver_id: new_driver.id,
+        passenger_id: new_passenger.id,
+        date: Date.today, 
+          rating: 5, 
+          cost: 1234
       } 
     }
    
     it "can create a trip" do
-      expect {post trips_path, params: trip_hash}.must_differ 'Trip.count', 1 # ActionController::ParameterMissing: param is missing or the value is empty: trip
+      expect {post trips_path, params: trip_hash}.must_differ 'Trip.count', 1 # NoMethodError: undefined method `[]=' for :bad_request:Symbol, Did you mean?  [], app/controllers/trips_controller.rb:26:in `create'
   
       expect(Trip.last.passenger_id).must_equal trip_hash[:trip][:passenger_id]
 
@@ -42,14 +46,20 @@ describe TripsController do
     end
    
     it "will not create a trip with invalid params" do
-      trip_hash = { 
-        passenger_id: -1,    
+      trip_hash = {
+        trip: { 
+          driver_id: @driver.id,
+          passenger_id: -1,
+          date: Date.today, 
+          rating: 5, 
+          cost: 1234
+        }
       }
       expect {
-        post trips_path, params: trip_hash # ActionController::ParameterMissing: param is missing or the value is empty: trip
+        post trips_path, params: trip_hash # NoMethodError: undefined method `[]=' for :bad_request:Symbol, Did you mean?  [], app/controllers/trips_controller.rb:26:in `create'
       }.wont_change "Trip.count"
       
-      must_respond_with :redirect
+      must_respond_with :bad_request
     end
   end
  
@@ -59,27 +69,28 @@ describe TripsController do
   end
  
   describe "update" do
+
     new_trip_hash = {
       trip: {
         driver_id: Driver.first.id,
         passenger_id: Passenger.first.id, 
-        date: Date.today, 
+        date: "Fri, 08 May 2020", 
         rating: 1, 
         cost: 123
       }     
     }
     it "will update a model with a valid post request" do
-      valid_id = Trip.first.id # not working
+      valid_id = Trip.first.id
       expect {
         patch trip_path(valid_id), params: new_trip_hash
       }.wont_change "Trip.count"
       
       trip = Trip.find_by(id: valid_id)
-      expect(trip).must_equal new_trip_hash[:trip][:driver_id]
-      expect(trip).must_equal new_trip_hash[:trip][:passenger_id]
-      expect(trip).must_equal new_trip_hash[:trip][:date]
-      expect(trip).must_equal new_trip_hash[:trip][:rating]
-      expect(trip).must_equal new_trip_hash[:trip][:cost]
+      expect(trip.driver_id).must_equal new_trip_hash[:trip][:driver_id]
+      expect(trip.passenger_id).must_equal new_trip_hash[:trip][:passenger_id]
+      expect(trip.date).must_equal new_trip_hash[:trip][:date]
+      expect(trip.rating).must_equal new_trip_hash[:trip][:rating]
+      expect(trip.cost).must_equal new_trip_hash[:trip][:cost]
 
       must_respond_with :redirect
     end
@@ -95,12 +106,12 @@ describe TripsController do
  
   describe "destroy" do
     it "destroys the trip instance in db when trip exists, then redirects" do
-      expect {delete trips_path, params: Trip.first.id}.must_differ 'Trip.count', -1 # doesn't work
+      expect {delete trip_path, params: Trip.first.id}.must_differ 'Trip.count', -1 #  No route matches {:action=>"show", :controller=>"trips"}, missing required keys: [:id]
     end
 
     it "does not change the db when the trip does not exist, then responds with redirect" do
       invalid_id = -1
-      expect {delete trips_path, params: invalid_id}.wont_change 'Trip.count'
+      expect {delete trip_path, params: invalid_id}.wont_change 'Trip.count' #  No route matches {:action=>"show", :controller=>"trips"}, missing required keys: [:id]
 
       must_respond_with :redirect
     end
