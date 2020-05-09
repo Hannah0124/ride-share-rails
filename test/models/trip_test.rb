@@ -64,16 +64,6 @@ describe Trip do
       expect(new_trip.errors.messages[:date]).must_equal ["can't be blank"]
     end
 
-    it "must have rating" do
-      # # Arrange
-      # new_trip.rating = nil
-
-      # # Assert
-      # expect(new_trip.valid?).must_equal false
-      # expect(new_trip.errors.messages).must_include :rating
-      # expect(new_trip.errors.messages[:rating]).must_equal ["can't be blank"]
-    end
-
     it "must have cost" do
       # Arrange
       new_trip.cost = nil

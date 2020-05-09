@@ -64,8 +64,8 @@ describe TripsController do
   end
  
   describe "edit" do
-    # must_redirect_to edit_trip_path # not in routes yet
-    # must_respond_with :success
+    must_redirect_to edit_trip_path
+    must_respond_with :success
   end
  
   describe "update" do

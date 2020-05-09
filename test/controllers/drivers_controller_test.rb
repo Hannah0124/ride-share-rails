@@ -97,12 +97,22 @@ describe DriversController do
       # Note: This will not pass until ActiveRecord Validations lesson
       # Arrange
       # Set up the form data so that it violates Driver validations
+      driver_hash = {
+        driver: {
+          name: nil, 
+          vin: nil
+        }
+      }
 
       # Act-Assert
       # Ensure that there is no change in Driver.count
+      expect {
+        post drivers_path, params: driver_hash
+      }.wont_change 'Driver.count'
 
       # Assert
       # Check that the controller redirects
+      must_respond_with :redirect
 
     end
   end
@@ -196,14 +206,26 @@ describe DriversController do
       # Note: This will not pass until ActiveRecord Validations lesson
       # Arrange
       # Ensure there is an existing driver saved
+      driver = Driver.create(name: "Yoyo", vin: "12345")
       # Assign the existing driver's id to a local variable
+      driver_id = driver.id
       # Set up the form data so that it violates Driver validations
+      update_hash = {
+        driver: {
+          name: nil, 
+          vin: nil
+        }
+      }
 
       # Act-Assert
       # Ensure that there is no change in Driver.count
+      expect {
+        patch drivers_path, params: update_hash
+      }.wont_change 'Driver.count'
 
       # Assert
       # Check that the controller redirects
+      must_respond_with :redirect
 
     end
   end
