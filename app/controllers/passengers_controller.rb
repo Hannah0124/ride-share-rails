@@ -8,7 +8,7 @@ class PassengersController < ApplicationController
     @passenger = Passenger.find_by(id: passenger_id)
 
     if @passenger.nil? 
-      redirect_to root_path 
+      render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
       return 
     end
   end 
@@ -35,7 +35,8 @@ class PassengersController < ApplicationController
     @passenger = Passenger.find_by(id: passenger_id)
 
     if @passenger.nil?
-      redirect_to root_path 
+      render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
+
       return 
     end
   end 
@@ -45,7 +46,8 @@ class PassengersController < ApplicationController
     @passenger = Passenger.find_by(id: passenger_id) 
 
     if @passenger.nil? 
-      redirect_to root_path 
+      render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
+
       return 
 
     elsif @passenger.update(passenger_params) 
@@ -64,7 +66,7 @@ class PassengersController < ApplicationController
     @passenger = Passenger.find_by(id: passenger_id) 
 
     if @passenger.nil?
-      redirect_to root_path 
+      render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
       return 
     else 
       @passenger.destroy 

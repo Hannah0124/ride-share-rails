@@ -5,7 +5,7 @@ class TripsController < ApplicationController
     @trip = Trip.find_by(id: trip_id)
 
     if @trip.nil? 
-      redirect_to root_path 
+      render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
       return 
     end
   end 
@@ -25,7 +25,7 @@ class TripsController < ApplicationController
     passenger = Passenger.find_by(id: params[:passenger_id])
 
     if passenger.nil? 
-      redirect_to passengers_path
+      render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
     else 
       trip_data = Trip.connect_trip
       # @trip = Trip.new(trip_data)
@@ -53,7 +53,7 @@ class TripsController < ApplicationController
     @trip = Trip.find_by(id: trip_id)
 
     if @trip.nil?
-      redirect_to root_path 
+      render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
       return 
     end
   end 
@@ -64,7 +64,7 @@ class TripsController < ApplicationController
     @trip = Trip.find_by(id: trip_id) 
 
     if @trip.nil? 
-      redirect_to root_path 
+      render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found 
       return 
 
     elsif @trip.update(trip_params) 
@@ -82,7 +82,7 @@ class TripsController < ApplicationController
     @trip = Trip.find_by(id: trip_id) 
 
     if @trip.nil?
-      redirect_to root_path 
+      render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
       return 
     else 
       @trip.destroy 
@@ -98,3 +98,5 @@ class TripsController < ApplicationController
   end
 end
 
+
+# 404 reference: https://rubyinrails.com/2018/02/26/rails-render-404-not-found-from-controller-action/
