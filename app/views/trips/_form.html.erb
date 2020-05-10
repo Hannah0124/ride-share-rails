@@ -1,15 +1,15 @@
 <%= form_with model: @trip, class: '_form__container' do |f| %>
   <p class="_form_instruction">Please provide the following information to <%= action_name %> the trips to our database:</p>
 
-  <% if @trip.errors.any? %> 
-    <ul class="errors"> 
-      <% @trip.errors.each do |column, message| %> 
-        <li>
-          <strong class="red"><%= column.capitalize %></strong> <%= message %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
+  <%# if @trip.errors.any? %> 
+    <%# <ul class="errors">  %>
+      <%# @trip.errors.each do |column, message| %> 
+        <%# <li> %>
+          <%# <strong class="red"><%= column.capitalize %></strong> <%= message %> %>
+        <%# </li> %>
+      <%# end %>
+    <%# </ul> %>
+  <%# end %>
 
 
   <div class="_form-text-container">
