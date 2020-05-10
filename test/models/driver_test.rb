@@ -60,12 +60,35 @@ describe Driver do
 
   # Tests for methods you create should go here
   describe "custom methods" do
+
     describe "average rating" do
-      # Your code here
+      it "successfully calculates average rating" do
+        # Arrange
+        newer_driver = Driver.create(name: "Karen", vin: "321", available: true)
+        new_passenger = Passenger.create(name: "Kevin", phone_num: "1234567890")
+        trip_1 = Trip.create(driver_id: newer_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 1, cost: 1234)
+        trip_2 = Trip.create(driver_id: newer_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 3, cost: 4321)
+        # Assert
+        expect(newer_driver.average_rating).must_equal 2
+      end
+
+      it "will return 0 as average if there are no ratings" do
+        # Arrange
+        newer_driver = Driver.create(name: "Karen", vin: "321", available: true)
+        # Assert
+        expect(newer_driver.average_rating).must_equal 0
+      end
     end
 
     describe "total earnings" do
-      # Your code here
+      it "successfully calculates 80% of the trip cost after a fee of $1.65 is subtracted" do
+        # Arrange
+        newer_driver = Driver.create(name: "Karen", vin: "321", available: true)
+        new_passenger = Passenger.create(name: "Kevin", phone_num: "1234567890")
+        trip_1 = Trip.create(driver_id: newer_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 1, cost: 12.34)
+        # Assert
+        expect(newer_driver.total_earnings).must_equal 8.552
+      end
     end
 
     describe "can go online" do
