@@ -71,7 +71,6 @@ class DriversController < ApplicationController
     end
   end
 
-
   def toggle_available 
     driver_id = params[:id]
 
@@ -88,7 +87,6 @@ class DriversController < ApplicationController
 
     redirect_to driver_path(@driver) 
   end
-
 
   private 
 
