@@ -7,7 +7,7 @@ describe DriversController do
     it "responds with success when there are many drivers saved" do
       # Arrange
       # Ensure that there is at least one Driver saved
-      Driver.create(name: "Yoyo", vin: "12345")
+      Driver.create(name: "Yoyo", vin: "12345678901234567")
 
       # Act
       get "/drivers"
@@ -34,7 +34,7 @@ describe DriversController do
     it "responds with success when showing an existing valid driver" do
       # Arrange
       # Ensure that there is a driver saved
-      driver = Driver.create(name: "Yoyo", vin: "12345")
+      driver = Driver.create(name: "Yoyo", vin: "12345678901234567")
 
       # Act
       valid_id = driver.id
@@ -73,14 +73,14 @@ describe DriversController do
       driver_hash = {
         driver: {
           name: "Yoyo", 
-          vin: "12345"
+          vin: "12345678901234567"
         }
       }
       # Act-Assert
       # Ensure that there is a change of 1 in Driver.count
       expect {
         post drivers_path, params: driver_hash
-      }.must_differ 'Driver.count', 1
+      }.must_differ 'Driver.count', 1 # not working, why?
       
 
       # Assert
@@ -112,7 +112,7 @@ describe DriversController do
 
       # Assert
       # Check that the controller redirects
-      must_respond_with :redirect
+      must_redirect_to drivers_path
 
     end
   end
@@ -121,10 +121,10 @@ describe DriversController do
     it "responds with success when getting the edit page for an existing, valid driver" do
       # Arrange
       # Ensure there is an existing driver saved
-      driver = Driver.create(name: "Yoyo", vin: "12345")
+      driver = Driver.create(name: "Yoyo", vin: "12345678901234567")
 
       # Act
-      get edit_driver_path(driver.id)
+      get "/drivers/#{driver.id}/edit"
 
       # Assert
       must_respond_with :success
@@ -151,20 +151,20 @@ describe DriversController do
       # Ensure there is an existing driver saved
       # Assign the existing driver's id to a local variable
       # Set up the form data
-      driver = Driver.create(name: "Yoyo", vin: "12345")
+      driver = Driver.create(name: "Yoyo", vin: "12345678901234567")
       driver_id = driver.id
 
       update_hash = {
         driver: {
           name: "Yo-Yo",
-          vin: "12345"
+          vin: "12345678901234567"
         }
       }
 
       # Act-Assert
       # Ensure that there is no change in Driver.count
       expect {
-        patch driver_path(driver_id), params: update_hash
+        patch driver_path(driver_id), params: update_hash # bad request
       }.wont_change 'Driver.count'
 
       # Assert
@@ -186,7 +186,7 @@ describe DriversController do
       update_hash = {
         driver: {
           name: "Yo-Yo",
-          vin: "12345"
+          vin: "12345678901234567"
         }
       }
 
@@ -206,7 +206,7 @@ describe DriversController do
       # Note: This will not pass until ActiveRecord Validations lesson
       # Arrange
       # Ensure there is an existing driver saved
-      driver = Driver.create(name: "Yoyo", vin: "12345")
+      driver = Driver.create(name: "Yoyo", vin: "12345678901234567")
       # Assign the existing driver's id to a local variable
       driver_id = driver.id
       # Set up the form data so that it violates Driver validations
@@ -220,7 +220,7 @@ describe DriversController do
       # Act-Assert
       # Ensure that there is no change in Driver.count
       expect {
-        patch drivers_path, params: update_hash
+        patch driver_path(driver_id), params: update_hash # bad request
       }.wont_change 'Driver.count'
 
       # Assert
@@ -234,7 +234,7 @@ describe DriversController do
     it "destroys the driver instance in db when driver exists, then redirects" do
       # Arrange
       # Ensure there is an existing driver saved
-      driver = Driver.create(name: "Yoyo", vin: "12345")
+      driver = Driver.create(name: "Yoyo", vin: "12345678901234567")
 
       # Act-Assert
       # Ensure that there is a change of -1 in Driver.count
