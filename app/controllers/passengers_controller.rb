@@ -55,7 +55,7 @@ class PassengersController < ApplicationController
       return 
 
     else 
-      render :edit, :bad_request
+      render :edit
       return 
     end
   end

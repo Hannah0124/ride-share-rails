@@ -2,7 +2,7 @@ class Driver < ApplicationRecord
   has_many :trips, dependent: :destroy
 
   validates :name, presence: true, format: { with: /\A[a-zA-Z\'\s]+\z/ }
-  validates :vin, presence: true, length: { is: 17 }
+  validates :vin, presence: true #, length: { is: 17 }
 
   def total_earnings 
     return 0.00 if self.trips.length < 1
@@ -34,6 +34,14 @@ class Driver < ApplicationRecord
 
   def sorted_trips_by_date # descending order 
     return self.trips.order(id: :desc).all
+  end
+
+  def toggle_available
+    if self.available
+      self.update(available: false)
+    else 
+      self.update(available: true)
+    end 
   end
 end
 

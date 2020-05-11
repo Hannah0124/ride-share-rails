@@ -14,7 +14,6 @@ describe DriversController do
 
       # Assert
       must_respond_with :success
-
     end
 
     it "responds with success when there are no drivers saved" do
@@ -54,8 +53,7 @@ describe DriversController do
       get "/drivers/#{invalid_id}"
 
       # Assert
-      must_respond_with :redirect
-
+      must_respond_with :not_found
     end
   end
 
@@ -73,14 +71,15 @@ describe DriversController do
       driver_hash = {
         driver: {
           name: "Yoyo", 
-          vin: "12345678901234567"
+          vin: "XYZ45678901234567",
+          available: false
         }
       }
       # Act-Assert
       # Ensure that there is a change of 1 in Driver.count
       expect {
         post drivers_path, params: driver_hash
-      }.must_differ 'Driver.count', 1 # not working, why?
+      }.must_differ 'Driver.count', 1
       
 
       # Assert
@@ -89,11 +88,11 @@ describe DriversController do
       expect(driver.name).must_equal driver_hash[:driver][:name]
       expect(driver.vin).must_equal driver_hash[:driver][:vin]
       # Check that the controller redirected the user
-      must_redirect_to driver_path(Driver.find_by(name: "Yoyo").id)
+      must_redirect_to driver_path(Driver.find_by(vin: "XYZ45678901234567").id)
 
     end
 
-    it "does not create a driver if the form data violates Driver validations, and responds with a redirect" do
+    it "does not create a driver if the form data violates Driver validations" do
       # Note: This will not pass until ActiveRecord Validations lesson
       # Arrange
       # Set up the form data so that it violates Driver validations
@@ -109,10 +108,6 @@ describe DriversController do
       expect {
         post drivers_path, params: driver_hash
       }.wont_change 'Driver.count'
-
-      # Assert
-      # Check that the controller redirects
-      must_redirect_to drivers_path
 
     end
   end
@@ -140,7 +135,7 @@ describe DriversController do
       get edit_driver_path(invalid_id)
 
       # Assert
-      must_respond_with :redirect
+      must_respond_with :not_found
 
     end
   end
@@ -151,12 +146,12 @@ describe DriversController do
       # Ensure there is an existing driver saved
       # Assign the existing driver's id to a local variable
       # Set up the form data
-      driver = Driver.create(name: "Yoyo", vin: "12345678901234567")
+      driver = Driver.create(name: "Goblin", vin: "12345678901234567")
       driver_id = driver.id
 
       update_hash = {
         driver: {
-          name: "Yo-Yo",
+          name: "Yoda",
           vin: "12345678901234567"
         }
       }
@@ -170,6 +165,7 @@ describe DriversController do
       # Assert
       # Use the local variable of an existing driver's id to find the driver again, and check that its attributes are updated
       updated_driver = Driver.find_by(id: driver_id)
+
       expect(updated_driver.name).must_equal update_hash[:driver][:name] # NoMethodError: undefined method `[]' for nil:NilClass
       expect(updated_driver.vin).must_equal update_hash[:driver][:vin]
       # Check that the controller redirected the user
@@ -198,7 +194,7 @@ describe DriversController do
 
       # Assert
       # Check that the controller gave back a 404
-      must_respond_with :redirect
+      must_respond_with :not_found
 
     end
 
@@ -222,10 +218,6 @@ describe DriversController do
       expect {
         patch driver_path(driver_id), params: update_hash # bad request
       }.wont_change 'Driver.count'
-
-      # Assert
-      # Check that the controller redirects
-      must_respond_with :redirect
 
     end
   end
@@ -261,7 +253,7 @@ describe DriversController do
 
       # Assert
       # Check that the controller responds or redirects with whatever your group decides
-      must_respond_with :redirect
+      must_respond_with :not_found
 
     end
   end

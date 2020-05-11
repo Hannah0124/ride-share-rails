@@ -24,7 +24,7 @@ class TripsController < ApplicationController
     # raise
     passenger = Passenger.find_by(id: params[:passenger_id])
 
-    if passenger.nil? 
+    if passenger.nil?
       render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
     else 
       trip_data = Trip.connect_trip

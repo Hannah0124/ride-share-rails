@@ -32,7 +32,7 @@ describe Trip do
     end
   end
 
-  # describe "validations" do
+  describe "validations" do
 
   #   it "must have driver_id" do
   #     # Arrange
@@ -61,16 +61,17 @@ describe Trip do
   #     expect(new_trip.errors.messages[:date]).must_equal ["is invalid"]
   #   end
 
-  #   it "must have cost" do
-  #     # Arrange
-  #     new_trip.cost = nil
+    it "must have cost" do
+     # Arrange
+      new_trip.cost = nil
 
-  #     # Assert
-  #     expect(new_trip.valid?).must_equal false
-  #     expect(new_trip.errors.messages[:cost]).must_equal ["is invalid"]
-  #   end   
+      # Assert
+      expect(new_trip.valid?).must_equal false
+      expect(new_trip.errors.messages).must_include :cost
+      expect(new_trip.errors.messages[:cost]).must_equal ["can't be blank", "is not a number"]
+    end   
 
-  # end
+  end
 
   # Tests for methods you create should go here
   describe "connect_trip" do
