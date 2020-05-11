@@ -72,16 +72,8 @@ describe Driver do
     describe "average rating" do
       it "successfully calculates average rating" do
         # Arrange
-<<<<<<< HEAD
-        newer_driver = Driver.create(name: "Karen", vin: "12345678901234567", available: true)
-        new_passenger = Passenger.create(name: "Kevin", phone_num: "1234567890")
-||||||| merged common ancestors
-        newer_driver = Driver.create(name: "Karen", vin: "321", available: true)
-        new_passenger = Passenger.create(name: "Kevin", phone_num: "1234567890")
-=======
         newer_driver = Driver.create(name: "Karen", vin: "321eurizooor45321", available: true)
         new_passenger = Passenger.create(name: "Kevin", phone_num: "1234567890xxxxxxx")
->>>>>>> 210dbd05e55c180aa9e2a2ea1ba2e315589f4a89
 
         trip_1 = Trip.create(driver_id: newer_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 1.0, cost: 99)
         trip_2 = Trip.create(driver_id: newer_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 3.0, cost: 18)
