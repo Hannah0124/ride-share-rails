@@ -9,7 +9,11 @@ class Passenger < ApplicationRecord
   end
 
   def sorted_trips_by_date # descending order 
-    return self.trips.order(date: :desc).all
+    return self.trips.order(id: :desc).all
+  end
+
+  def num_of_rides 
+    return self.trips.count
   end
 end
 

@@ -8,7 +8,7 @@ class DriversController < ApplicationController
     @driver = Driver.find_by(id: driver_id)
 
     if @driver.nil? 
-      redirect_to root_path 
+      render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
       return 
     end
   end 
@@ -34,7 +34,7 @@ class DriversController < ApplicationController
     @driver = Driver.find_by(id: driver_id)
 
     if @driver.nil?
-      redirect_to root_path 
+      render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
       return 
     end
   end 
@@ -44,7 +44,7 @@ class DriversController < ApplicationController
     @driver = Driver.find_by(id: driver_id) 
 
     if @driver.nil? 
-      redirect_to root_path 
+      render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
       return 
 
     elsif @driver.update(driver_params) 
@@ -62,7 +62,7 @@ class DriversController < ApplicationController
     @driver = Driver.find_by(id: driver_id) 
 
     if @driver.nil?
-      redirect_to root_path 
+      render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
       return 
     else 
       @driver.destroy 
@@ -77,7 +77,7 @@ class DriversController < ApplicationController
     @driver = Driver.find_by(id: driver_id)
 
     if @driver.nil? 
-      redirect_to drivers_path
+      render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
       return 
     elsif @driver.available
       @driver.update(available: false)

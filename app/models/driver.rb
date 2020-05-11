@@ -10,7 +10,12 @@ class Driver < ApplicationRecord
   end
 
   def average_rating 
-    length = self.trips.count  
+    length = 0
+    self.trips.each do |trip| 
+      if !trip.rating.nil?
+        length += 1 
+      end
+    end
 
     return 0 if length == 0 
       
@@ -19,12 +24,16 @@ class Driver < ApplicationRecord
     return (total_rating / length).round(1)
   end
 
+  def num_of_rides 
+    return self.trips.count
+  end
+
   def self.find_available_drivers 
     return Driver.find_by(available: true)
   end
 
   def sorted_trips_by_date # descending order 
-    return self.trips.order(date: :desc).all
+    return self.trips.order(id: :desc).all
   end
 end
 

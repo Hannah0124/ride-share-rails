@@ -28,7 +28,7 @@
 
   <div class="trips__show__btn">
     <%= link_to "E D I T ✏️  ", edit_trip_path(@trip.id), class: 'trips__show__edit-btn' %>
-    <%= link_to " Delete ❌ ", trip_path(@trip.id), method: :delete, data: { confirm: '❗️ Would you like to delete the trip?'}, class: 'trips__show__delete-btn' %>
+    <%= link_to " Delete trip ❌ ", trip_path(@trip.id), method: :delete, data: { confirm: '❗️ Would you like to delete the trip?'}, class: 'trips__show__delete-btn' %>
   </div>
 </section>
 
