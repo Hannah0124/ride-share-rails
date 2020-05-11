@@ -26,12 +26,16 @@
       <span class="drivers__show__detail-title">Average Rating:</span>
       ⭐️<strong><%= @driver.average_rating %></strong> / 5
     </p>
+    <p>
+      <span class="drivers__show__detail-title">Number of Rides:</span>
+      #<%= @driver.num_of_rides %>
+    </p>
   </div>
 
   <div class="drivers__show__btn">
     <%= link_to @driver.available ? "Mark Unavailable" : "Mark Available", toggle_available_path(@driver.id), class: 'drivers__show__mark-available-btn', method: :patch, data: { confirm: '❗️ Would you like to update your status?' } %>
     <%= link_to "E D I T ✏️  ", edit_driver_path(@driver.id), class: 'drivers__show__edit-btn' %>
-    <%= link_to " Delete ❌ ", driver_path(@driver.id), method: :delete, data: { confirm: '❗️ Would you like to delete the driver?'}, class: 'drivers__show__delete-btn' %>
+    <%= link_to " Delete driver ❌ ", driver_path(@driver.id), method: :delete, data: { confirm: '❗️ Would you like to delete the driver?'}, class: 'drivers__show__delete-btn' %>
   </div>
 </section>
 

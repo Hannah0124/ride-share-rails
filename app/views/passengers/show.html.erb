@@ -19,12 +19,16 @@
       <span class="passengers__show__detail-title">Total Charges:</span>
       $ <%= @passenger.total_charges %>
     </p>
+    <p>
+      <span class="passengers__show__detail-title">Number of Rides:</span>
+      #<%= @passenger.num_of_rides %>
+    </p>
   </div>
 
   <div class="passengers__show__btn">
     <%= link_to " Request Ride➕ ", passenger_trips_path(@passenger.id), method: :post, class: 'passengers__show__request-ride-btn' %>
     <%= link_to "E D I T ✏️  ", edit_passenger_path(@passenger.id), class: 'passengers__show__edit-btn' %>
-    <%= link_to " Delete ❌ ", passenger_path(@passenger), method: :delete, data: { confirm: '❗️ Would you like to delete the passenger?'}, class: 'passengers__show__delete-btn' %>
+    <%= link_to " Delete passenger ❌ ", passenger_path(@passenger), method: :delete, data: { confirm: '❗️ Would you like to delete the passenger?'}, class: 'passengers__show__delete-btn' %>
   </div>
 </section>
 
