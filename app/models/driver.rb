@@ -2,7 +2,7 @@ class Driver < ApplicationRecord
   has_many :trips, dependent: :destroy
 
   validates :name, presence: true, format: { with: /\A[a-zA-Z\'\s]+\z/ }
-  validates :vin, presence: true #, length: { is: 17 }
+  validates :vin, presence: true, length: { is: 17 }
 
   def total_earnings 
     return 0.00 if self.trips.length < 1

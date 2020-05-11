@@ -3,10 +3,10 @@ require "test_helper"
 describe Trip do
 
   let (:new_driver) {
-    Driver.create(name: "Yoyo", vin: "12345678901234567")
+    Driver.create(name: "Yoyo", vin: "xxxxxyz1234567890")
   }
   let (:new_passenger) {
-    Passenger.create(name: "Hannah", phone_num: "1234567890")
+    Passenger.create(name: "Hannah", phone_num: "7893932233")
   }
   let (:new_trip) {
     Trip.create(driver_id: new_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 5, cost: 1234)

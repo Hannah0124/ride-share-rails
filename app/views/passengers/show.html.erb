@@ -26,7 +26,7 @@
   </div>
 
   <div class="passengers__show__btn">
-    <%= link_to " Request Ride➕ ", passenger_trips_path(@passenger.id), method: :post, class: 'passengers__show__request-ride-btn' %>
+    <%= link_to " Request Ride➕ ", passenger_trips_path(@passenger.id), method: :post, class: 'passengers__show__request-ride-btn', data: { confirm: '❗️ Are you sure you want to request a ride?' } %>
     <%= link_to "E D I T ✏️  ", edit_passenger_path(@passenger.id), class: 'passengers__show__edit-btn' %>
     <%= link_to " Delete passenger ❌ ", passenger_path(@passenger), method: :delete, data: { confirm: '❗️ Would you like to delete the passenger?'}, class: 'passengers__show__delete-btn' %>
   </div>
