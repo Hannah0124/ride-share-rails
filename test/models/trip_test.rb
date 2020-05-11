@@ -18,7 +18,7 @@ describe Trip do
 
   it "will have the required fields" do
     new_trip.save
-    trip = Trip.first # is nil?
+    trip = Trip.first
     [:driver_id, :passenger_id, :date, :rating, :cost].each do |field|
       # Assert
       expect(trip).must_respond_to field
@@ -28,7 +28,7 @@ describe Trip do
   describe "relationships" do
     it "belongs to a driver and passenger" do
       expect(new_trip.passenger).must_be_instance_of Passenger
-      expect(new_trip.driver).must_be_instance_of Driver # Expected nil to be an instance of Driver, not NilClass.
+      expect(new_trip.driver).must_be_instance_of Driver
     end
   end
 
@@ -73,7 +73,15 @@ describe Trip do
   # end
 
   # Tests for methods you create should go here
-  describe "custom methods" do
-    # Your tests here
+  describe "connect_trip" do
+
+    Driver.first.available = true
+
+    it "returns driver_id, date and cost" do
+      
+    end
+    it "marks driver as unavailable" do
+      
+    end
   end
 end
