@@ -52,7 +52,7 @@ describe PassengersController do
       get "/passengers/#{invalid_id}"
 
       # Assert
-      must_respond_with :redirect
+      must_respond_with :not_found
 
     end
   end
@@ -70,7 +70,7 @@ describe PassengersController do
       # Set up the form data
       passenger_hash = {
         passenger: {
-          name: "Hannah", 
+          name: "Curmit", 
           phone_num: "1234567890"
         }
       }
@@ -87,7 +87,7 @@ describe PassengersController do
       expect(passenger.name).must_equal passenger_hash[:passenger][:name]
       expect(passenger.phone_num).must_equal passenger_hash[:passenger][:phone_num]
       # Check that the controller redirected the user
-      must_redirect_to passenger_path(Passenger.find_by(name: "Hannah").id)
+      must_redirect_to passenger_path(Passenger.find_by(name: "Curmit").id)
 
     end
   end
@@ -115,7 +115,7 @@ describe PassengersController do
       get edit_passenger_path(invalid_id)
 
       # Assert
-      must_respond_with :redirect
+      must_respond_with :not_found
 
     end
   end
@@ -173,7 +173,7 @@ describe PassengersController do
 
       # Assert
       # Check that the controller gave back a 404
-      must_respond_with :redirect
+      must_respond_with :not_found
 
     end
   end
@@ -209,7 +209,7 @@ describe PassengersController do
 
       # Assert
       # Check that the controller responds or redirects with whatever your group decides
-      must_respond_with :redirect
+      must_respond_with :not_found
 
     end
   end

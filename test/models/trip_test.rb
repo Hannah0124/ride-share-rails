@@ -71,7 +71,7 @@ describe Trip do
       # Assert
       expect(new_trip.valid?).must_equal false
       expect(new_trip.errors.messages).must_include :cost
-      expect(new_trip.errors.messages[:cost]).must_equal ["can't be blank"]
+      expect(new_trip.errors.messages[:cost]).must_equal ["can't be blank", "is not a number"]
     end   
 
   end

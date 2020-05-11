@@ -52,7 +52,7 @@ class DriversController < ApplicationController
       return 
 
     else 
-      render :edit, :bad_request
+      render :edit
       return 
     end
   end
@@ -79,13 +79,20 @@ class DriversController < ApplicationController
     if @driver.nil? 
       render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
       return 
-    elsif @driver.available
-      @driver.update(available: false)
     else 
-      @driver.update(available: true)
+      @driver.toggle_available
+      redirect_to driver_path(@driver) 
+      return
     end 
 
-    redirect_to driver_path(@driver) 
+    
+    # elsif @driver.available
+    #   @driver.update(available: false)
+    # else 
+    #   @driver.update(available: true)
+    # end 
+
+    # redirect_to driver_path(@driver) 
   end
 
   private 
