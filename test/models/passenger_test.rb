@@ -58,4 +58,33 @@ describe Passenger do
     end
   end
 
+  describe "total_charges" do
+    it "shows accurate total of trip charges" do
+      new_passenger.save
+      new_driver = Driver.create(name: "Waldo", vin: "ALWSS52P9NEYLVDE9")
+      trip_1 = Trip.create(driver_id: new_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 5, cost: 1234)
+      trip_2 = Trip.create(driver_id: new_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 3, cost: 6334)
+
+      expect(new_passenger.total_charges).must_equal (trip_1.cost + trip_2.cost)
+    end
+  end
+
+  describe "sorted_trips_by_date" do
+    it "shows trips in descending order" do
+      new_passenger.save
+      new_driver = Driver.create(name: "Waldo", vin: "ALWSS52P9NEYLVDE9")
+      trip_1 = Trip.create(driver_id: new_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 5, cost: 1234)
+      trip_2 = Trip.create(driver_id: new_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 3, cost: 6334)
+
+      expect(new_passenger.sorted_trips_by_date.first).must_equal trip_2
+      expect(new_passenger.sorted_trips_by_date.last).must_equal trip_1
+    end
+  end
+    
+  describe "num_of_rides" do
+    it "shows accurate number of rides" do
+      trips_count = new_passenger.trips.count
+      expect(new_passenger.num_of_rides).must_equal trips_count
+    end
+  end
 end

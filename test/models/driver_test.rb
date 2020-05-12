@@ -69,6 +69,17 @@ describe Driver do
   # Tests for methods you create should go here
   describe "custom methods" do
 
+    describe "total earnings" do
+      it "successfully calculates 80% of the trip cost after a fee of $1.65 is subtracted" do
+        # Arrange
+        newer_driver = Driver.create(name: "Karen", vin: "321xxxxxxyyyyyy12", available: true)
+        new_passenger = Passenger.create(name: "Kevin", phone_num: "1234567890")
+        trip_1 = Trip.create(driver_id: newer_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 1, cost: 12.34)
+        # Assert
+        expect(newer_driver.total_earnings).must_equal 8.552 # not working
+      end
+    end
+
     describe "average rating" do
       it "successfully calculates average rating" do
         # Arrange
@@ -90,15 +101,48 @@ describe Driver do
       end
     end
 
-    describe "total earnings" do
-      it "successfully calculates 80% of the trip cost after a fee of $1.65 is subtracted" do
-        # Arrange
-        newer_driver = Driver.create(name: "Karen", vin: "321xxxxxxyyyyyy12", available: true)
-        new_passenger = Passenger.create(name: "Kevin", phone_num: "1234567890")
-        trip_1 = Trip.create(driver_id: newer_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 1, cost: 12.34)
-        # Assert
-        expect(newer_driver.total_earnings).must_equal 8.552 # not working
+    describe "num_of_rides" do
+      it "shows accurate number of rides" do
+        trips_count = new_driver.trips.count
+        expect(new_driver.num_of_rides).must_equal trips_count
       end
     end
+
+
+    describe "find_available_drivers" do
+      it "returns available driver" do
+        # set one available, one unavailable driver
+        new_driver.save
+      
+        expect(Driver.find_available_drivers.available).must_equal true
+        # expect(Driver.find_available_drivers).must_equal new_driver
+      end
+    end
+
+    describe "sorted_trips_by_date" do
+      it "shows trips in descending order" do
+        new_driver.save
+        new_passenger = Passenger.create(name: "Elephant", phone_num: "567-394-3241")
+        trip_1 = Trip.create(driver_id: new_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 5, cost: 1234)
+        trip_2 = Trip.create(driver_id: new_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 3, cost: 6334)
+  
+        expect(new_driver.sorted_trips_by_date.first).must_equal trip_2
+        expect(new_driver.sorted_trips_by_date.last).must_equal trip_1
+      end
+    end
+
+    describe "toggle_available" do
+      it "updates driver to be available or unavailable" do
+        new_driver.save
+
+        new_driver.toggle_available
+        expect(new_driver.available).must_equal false
+
+        new_driver.toggle_available
+        expect(new_driver.available).must_equal true
+        
+      end
+    end
+
   end
 end

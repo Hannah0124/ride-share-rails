@@ -75,13 +75,19 @@ describe Trip do
 
   # Tests for methods you create should go here
   describe "connect_trip" do
-
-    Driver.first.available = true
+    newer_trip = Trip.new(passenger_id: Passenger.first.id)
+    # newer_trip.connect_trip
+    newer_trip.save
 
     it "returns driver_id, date and cost" do
+
+      # [:driver_id, :date, :cost].each do |field|
+      #   expect(newer_trip.connect_trip).must_respond_to field
+      # end
       
     end
     it "marks driver as unavailable" do
+      expect(Driver.find_by(id: newer_trip.driver_id).available).must_equal false
       
     end
   end
