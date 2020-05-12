@@ -4,6 +4,7 @@ describe Driver do
   let (:new_driver) {
     Driver.new(name: "Pokemon Trainer", vin: "123xyz123iopuiozz", available: true)
   }
+
   it "can be instantiated" do
     # Assert
     expect(new_driver.valid?).must_equal true
@@ -104,12 +105,45 @@ describe Driver do
 
     describe "can go online" do
       # Your code here
+      it "can toggle driver as unavailable" do    
+        new_driver.save
+      
+        expect(new_driver.available).must_equal true
+
+        new_driver.toggle_available 
+        expect(new_driver.available).must_equal false
+      end   
     end
 
     describe "can go offline" do
       # Your code here
+      it "can toggle driver as available" do  
+        new_driver.save 
+        new_driver.update(available: false)
+
+        expect(new_driver.available).must_equal false
+
+        new_driver.toggle_available 
+        expect(new_driver.available).must_equal true 
+      end 
     end
 
     # You may have additional methods to test
+    describe "num of rides" do 
+      it "can count number of rides correctly" do 
+        new_driver.save
+        
+        first_passenger = Passenger.first
+        second_passenger = Passenger.find(2)
+        third_passenger = Passenger.last
+
+        Trip.create(driver_id: new_driver.id, passenger_id: first_passenger.id, date: Date.today, rating: 5, cost: 12)
+        Trip.create(driver_id: new_driver.id, passenger_id: second_passenger.id, date: Date.today, rating: 5, cost: 50)
+        Trip.create(driver_id: new_driver.id, passenger_id: third_passenger.id, date: Date.today, rating: 4, cost: 30)
+
+        expect(new_driver.num_of_rides).must_be_instance_of Integer
+        expect(new_driver.num_of_rides).must_equal 3
+      end
+    end
   end
 end

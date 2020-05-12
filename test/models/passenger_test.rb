@@ -4,6 +4,7 @@ describe Passenger do
   let (:new_passenger) {
     Passenger.new(name: "Kari", phone_num: "111-111-1211")
   }
+
   it "can be instantiated" do
     # Assert
     expect(new_passenger.valid?).must_equal true
@@ -68,5 +69,20 @@ describe Passenger do
       # Your code here
     end
     # You may have additional methods to test here
+
+    describe "num of rides" do 
+      it "can count number of rides correctly" do 
+        new_passenger.save
+
+        frist_driver = Driver.find_available_drivers
+        second_driver = Driver.find_available_drivers
+
+        Trip.create(driver_id: frist_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 5, cost: 12)
+        Trip.create(driver_id: second_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 5, cost: 50)
+
+        expect(new_passenger.num_of_rides).must_be_instance_of Integer
+        expect(new_passenger.num_of_rides).must_equal 2
+      end
+    end
   end
 end
