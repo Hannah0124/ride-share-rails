@@ -40,7 +40,7 @@ describe Trip do
 
       # Assert
       expect(new_trip.valid?).must_equal false
-      expect(new_trip.errors.messages[:driver_id]).must_equal ["is invalid"]
+      expect(new_trip.errors.messages[:driver_id]).must_equal ["can't be blank"]
     end
 
     it "must have passenger_id" do
@@ -49,16 +49,17 @@ describe Trip do
 
       # Assert
       expect(new_trip.valid?).must_equal false
-      expect(new_trip.errors.messages[:passenger_id]).must_equal ["is invalid"]
+      expect(new_trip.errors.messages[:passenger_id]).must_equal ["can't be blank"]
     end
 
     it "must have date" do
       # Arrange
       new_trip.date = nil
+      new_trip.save
 
       # Assert
       # expect(new_trip.valid?).must_equal false # not working
-      expect(new_trip.errors.messages[:date]).must_equal ["is invalid"]
+      expect(new_trip.errors.messages[:date]).must_equal ["can't be blank"]
     end
 
     it "must have cost" do
@@ -86,6 +87,7 @@ describe Trip do
       end
       
     end
+
     it "marks driver as unavailable" do
       expect(Driver.find_by(id: newer_trip.driver_id).available).must_equal false
     end
