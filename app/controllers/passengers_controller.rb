@@ -17,7 +17,6 @@ class PassengersController < ApplicationController
     @passenger = Passenger.new
   end
 
-
   def create
     @passenger = Passenger.new(passenger_params)
 
@@ -59,7 +58,6 @@ class PassengersController < ApplicationController
       return 
     end
   end
-
 
   def destroy 
     passenger_id = params[:id] 

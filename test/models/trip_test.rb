@@ -58,7 +58,6 @@ describe Trip do
       new_trip.save
 
       # Assert
-      # expect(new_trip.valid?).must_equal false # not working
       expect(new_trip.errors.messages[:date]).must_equal ["can't be blank"]
     end
 
@@ -74,13 +73,12 @@ describe Trip do
 
   end
 
-  # Tests for methods you create should go here
   describe "connect_trip" do
     it "returns driver_id, date and cost" do
       expect(Trip.connect_trip[:driver_id]).must_be_instance_of Integer
       expect(Trip.connect_trip[:date]).must_be_instance_of Date
       expect(Trip.connect_trip[:cost]).must_be_instance_of Integer
-
     end
   end
+  
 end
