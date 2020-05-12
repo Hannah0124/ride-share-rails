@@ -40,7 +40,7 @@ describe Trip do
 
       # Assert
       expect(new_trip.valid?).must_equal false
-      expect(new_trip.errors.messages[:driver_id]).must_equal ["is invalid"]
+      expect(new_trip.errors.messages[:driver_id]).must_equal ["can't be blank"]
     end
 
     it "must have passenger_id" do
@@ -49,16 +49,17 @@ describe Trip do
 
       # Assert
       expect(new_trip.valid?).must_equal false
-      expect(new_trip.errors.messages[:passenger_id]).must_equal ["is invalid"]
+      expect(new_trip.errors.messages[:passenger_id]).must_equal ["can't be blank"]
     end
 
     it "must have date" do
       # Arrange
       new_trip.date = nil
+      new_trip.save
 
       # Assert
       # expect(new_trip.valid?).must_equal false # not working
-      expect(new_trip.errors.messages[:date]).must_equal ["is invalid"]
+      expect(new_trip.errors.messages[:date]).must_equal ["can't be blank"]
     end
 
     it "must have cost" do
@@ -75,16 +76,11 @@ describe Trip do
 
   # Tests for methods you create should go here
   describe "connect_trip" do
-    # newer_trip = Trip.new(passenger_id: Passenger.first.id)
-    # Trip.connect_trip
-    # newer_trip.save
+    it "returns driver_id, date and cost" do
+      expect(Trip.connect_trip[:driver_id]).must_be_instance_of Integer
+      expect(Trip.connect_trip[:date]).must_be_instance_of Date
+      expect(Trip.connect_trip[:cost]).must_be_instance_of Integer
 
-    # it "returns driver_id, date and cost" do
-
-    #   [:driver_id].each do |field|
-    #     expect(Trip.connect_trip).must_respond_to field
-    #   end
-      
     end
   end
 end
