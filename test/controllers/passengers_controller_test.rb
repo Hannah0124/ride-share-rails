@@ -210,7 +210,6 @@ describe PassengersController do
       # Assert
       # Check that the controller responds or redirects with whatever your group decides
       must_respond_with :not_found
-
     end
   end
 end

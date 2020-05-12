@@ -166,11 +166,9 @@ describe DriversController do
       # Use the local variable of an existing driver's id to find the driver again, and check that its attributes are updated
       updated_driver = Driver.find_by(id: driver_id)
 
-      expect(updated_driver.name).must_equal update_hash[:driver][:name] # NoMethodError: undefined method `[]' for nil:NilClass
+      expect(updated_driver.name).must_equal update_hash[:driver][:name] 
       expect(updated_driver.vin).must_equal update_hash[:driver][:vin]
-      # Check that the controller redirected the user
       must_respond_with :redirect
-
     end
 
     it "does not update any driver if given an invalid id, and responds with a 404" do
@@ -199,7 +197,6 @@ describe DriversController do
     end
 
     it "does not create a driver if the form data violates Driver validations, and responds with a redirect" do
-      # Note: This will not pass until ActiveRecord Validations lesson
       # Arrange
       # Ensure there is an existing driver saved
       driver = Driver.create(name: "Yoyo", vin: "12345678901234567")

@@ -107,7 +107,6 @@ describe Driver do
         new_driver.save
       
         expect(Driver.find_available_drivers.available).must_equal true
-        # expect(Driver.find_available_drivers).must_equal new_driver
       end
     end
 
@@ -132,7 +131,7 @@ describe Driver do
 
         new_driver.toggle_available
         expect(new_driver.available).must_equal true   
-      end
+      endt
     end
 
 
