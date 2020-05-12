@@ -90,7 +90,7 @@ describe Driver do
         trip_2 = Trip.create(driver_id: newer_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 3.0, cost: 18)
 
         # Assert
-        expect(newer_driver.average_rating).must_equal 2
+        expect(newer_driver.average_rating).must_equal 2 # not working
       end
 
       it "will return 0 as average if there are no ratings" do

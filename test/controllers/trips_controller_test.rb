@@ -24,10 +24,6 @@ describe TripsController do
 
   describe "create" do
 
-    # new_passenger = Passenger.create(name: "Pengsoo", phone_num: "1112223333")
-    # new_driver = Driver.create(name: "Chiitan", vin: "76543210987654321", available: true)
-    # new_driver.save
-
     it "can create a trip" do
 
       driver = Driver.create(name: "Yoyo", vin: "xyz45678901234567")
@@ -44,7 +40,7 @@ describe TripsController do
 
       expect {
         post passenger_trips_path(passenger), params: trip_hash
-      }.must_differ 'Trip.count', 1 # "Trip.count" didn't change by 1, nested route?
+      }.must_differ 'Trip.count', 1
   
       expect(Trip.last.passenger_id).must_equal trip_hash[:trip][:passenger_id]
 
@@ -64,7 +60,7 @@ describe TripsController do
         }
       }
       expect {
-        post trips_path, params: trip_hash # NoMethodError: undefined method `[]=' for :bad_request:Symbol, Did you mean?  [], app/controllers/trips_controller.rb:26:in `create'
+        post trips_path, params: trip_hash
       }.wont_change "Trip.count"
       
       must_respond_with :not_found

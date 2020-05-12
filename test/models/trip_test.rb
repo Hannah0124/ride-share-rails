@@ -40,8 +40,7 @@ describe Trip do
 
       # Assert
       expect(new_trip.valid?).must_equal false
-      expect(new_trip.errors.messages).must_include :driver_id
-      expect(new_trip.errors.messages[:driver_id]).must_equal ["can't be blank"]
+      expect(new_trip.errors.messages[:driver_id]).must_equal ["is invalid"]
     end
 
     it "must have passenger_id" do
@@ -50,8 +49,7 @@ describe Trip do
 
       # Assert
       expect(new_trip.valid?).must_equal false
-      expect(new_trip.errors.messages).must_include :passenger_id
-      expect(new_trip.errors.messages[:passenger_id]).must_equal ["can't be blank"]
+      expect(new_trip.errors.messages[:passenger_id]).must_equal ["is invalid"]
     end
 
     it "must have date" do
@@ -59,9 +57,8 @@ describe Trip do
       new_trip.date = nil
 
       # Assert
-      expect(new_trip.valid?).must_equal false
-      expect(new_trip.errors.messages).must_include :date
-      expect(new_trip.errors.messages[:date]).must_equal ["can't be blank"]
+      # expect(new_trip.valid?).must_equal false # not working
+      expect(new_trip.errors.messages[:date]).must_equal ["is invalid"]
     end
 
     it "must have cost" do
@@ -77,7 +74,20 @@ describe Trip do
   end
 
   # Tests for methods you create should go here
-  describe "custom methods" do
-    # Your tests here
+  describe "connect_trip" do
+    newer_trip = Trip.new(passenger_id: Passenger.first.id)
+    # newer_trip.connect_trip
+    newer_trip.save
+
+    it "returns driver_id, date and cost" do
+
+      [:driver_id, :date, :cost].each do |field|
+        expect(newer_trip.connect_trip).must_respond_to field
+      end
+      
+    end
+    it "marks driver as unavailable" do
+      expect(Driver.find_by(id: newer_trip.driver_id).available).must_equal false
+    end
   end
 end

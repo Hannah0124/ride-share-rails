@@ -79,7 +79,7 @@ describe DriversController do
       # Ensure that there is a change of 1 in Driver.count
       expect {
         post drivers_path, params: driver_hash
-      }.must_differ 'Driver.count', 1 # not working, why?
+      }.must_differ 'Driver.count', 1
       
 
       # Assert
@@ -92,7 +92,7 @@ describe DriversController do
 
     end
 
-    it "does not create a driver if the form data violates Driver validations, and responds with a redirect" do
+    it "does not create a driver if the form data violates Driver validations" do
       # Note: This will not pass until ActiveRecord Validations lesson
       # Arrange
       # Set up the form data so that it violates Driver validations
@@ -108,12 +108,6 @@ describe DriversController do
       expect {
         post drivers_path, params: driver_hash
       }.wont_change 'Driver.count'
-
-      # Assert
-      # Check that the controller redirects
-
-      # TODO: I believe that our program does not "redirect" when invalid data is given
-      # must_respond_with :redirect
 
     end
   end
@@ -224,11 +218,6 @@ describe DriversController do
       expect {
         patch driver_path(driver_id), params: update_hash # bad request
       }.wont_change 'Driver.count'
-
-      # Assert
-      # Check that the controller redirects
-      # TODO: I believe that our program does not "redirect" when invalid data is given
-      # must_respond_with :redirect
 
     end
   end

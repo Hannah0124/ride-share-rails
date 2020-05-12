@@ -58,7 +58,7 @@ describe Passenger do
     end
   end
 
-  # custom method
+
   describe "total_charges" do
     it "shows accurate total of trip charges" do
       new_passenger.save
@@ -95,6 +95,6 @@ describe Passenger do
 
       expect(new_passenger.num_of_rides).must_be_instance_of Integer
       expect(new_passenger.num_of_rides).must_equal 2
-    end
-  end
+    end 
+  end 
 end
