@@ -3,8 +3,8 @@
 
   <div class="_form-text-container">
     <div class="_form">
-      <%= f.label :rating, class: "_form__label" %>
-      <%= f.text_field :rating, class: "_form__text_field" %>
+      <%= f.label :rating , class: "_form__label" %>
+      <%= f.select :rating, [5, 4, 3, 2, 1], {}, {:class =>  "_form__select"} %>
     </div>
     <div class="_form">
       <%= f.label :cost, class: "_form__label" %>
@@ -18,3 +18,7 @@
 
   <%= f.submit action_name, class: "_form__trip-btn" %>
 <% end %>
+
+
+<%# reference: how to style f.select  %>
+<%# https://stackoverflow.com/questions/4081907/ruby-on-rails-form-for-select-field-with-class %>

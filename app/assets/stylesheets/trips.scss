@@ -73,6 +73,14 @@
   margin-left: 20px;
 }
 
+._form__select {
+  text-align: center;
+  text-align-last: center;
+  direction: ctl;
+  border: 0;
+  cursor: pointer;
+}
+
 ._form_instruction {
   color: gray;
   font-size: 18px;

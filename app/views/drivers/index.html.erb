@@ -10,6 +10,7 @@
 
   <%# reference: https://codepen.io/nikhil8krishnan/pen/WvYPvv %>
   <section>
+    <h6 class="gray-letter">order: sorted by ID ascending</h6>
     <div class="tbl-header drivers__index__background">
       <table cellpadding="0" cellspacing="0" border="0">
         <thead>
@@ -18,6 +19,9 @@
             <th>Name</th>
             <th>VIN</th>
             <th>AVAILABLE</th>
+            <th>change status</th>
+            <th>details</th>
+            <%# <th>edit</th> %>
           </tr>
         </thead>
       </table>
@@ -36,6 +40,10 @@
                 <% else %>
                   <td>unavailable</td>
                 <% end %>
+                <td>
+                  <%= link_to driver.available ? "Mark Unavailable" : "Mark Available", toggle_available_path(driver.id), method: :patch, data: { confirm: '❗️ Would you like to update your status?' } %>
+                </td>
+                <td><%= link_to "details", driver_path(driver) %></td>
               </tr>
             <% end %>
           
