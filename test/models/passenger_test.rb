@@ -4,7 +4,6 @@ describe Passenger do
   let (:new_passenger) {
     Passenger.new(name: "Kari", phone_num: "111-111-1211")
   }
-
   it "can be instantiated" do
     # Assert
     expect(new_passenger.valid?).must_equal true
@@ -48,7 +47,7 @@ describe Passenger do
       expect(new_passenger.errors.messages[:name]).must_equal ["can't be blank", "is invalid"]
     end
 
-    it "must have a phone number" do
+    it "must have a unique phone number" do
       # Arrange
       new_passenger.phone_num = nil
 
@@ -59,30 +58,43 @@ describe Passenger do
     end
   end
 
-  # Tests for methods you create should go here
-  describe "custom methods" do
-    describe "request a ride" do
-      # Your code here
+  # custom method
+  describe "total_charges" do
+    it "shows accurate total of trip charges" do
+      new_passenger.save
+      new_driver = Driver.create(name: "Waldo", vin: "ALWSS52P9NEYLVDE9")
+      trip_1 = Trip.create(driver_id: new_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 5, cost: 1234)
+      trip_2 = Trip.create(driver_id: new_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 3, cost: 6334)
+
+      expect(new_passenger.total_charges).must_equal (trip_1.cost + trip_2.cost)
     end
+  end
 
-    describe "complete trip" do
-      # Your code here
+  describe "sorted_trips_by_date" do
+    it "shows trips in descending order" do
+      new_passenger.save
+      new_driver = Driver.create(name: "Waldo", vin: "ALWSS52P9NEYLVDE9")
+      trip_1 = Trip.create(driver_id: new_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 5, cost: 1234)
+      trip_2 = Trip.create(driver_id: new_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 3, cost: 6334)
+
+      expect(new_passenger.sorted_trips_by_date.first).must_equal trip_2
+      expect(new_passenger.sorted_trips_by_date.last).must_equal trip_1
     end
-    # You may have additional methods to test here
+  end
 
-    describe "num of rides" do 
-      it "can count number of rides correctly" do 
-        new_passenger.save
 
-        frist_driver = Driver.find_available_drivers
-        second_driver = Driver.find_available_drivers
+  describe "num_of_rides" do 
+    it "can count number of rides correctly" do 
+      new_passenger.save
 
-        Trip.create(driver_id: frist_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 5, cost: 12)
-        Trip.create(driver_id: second_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 5, cost: 50)
+      frist_driver = Driver.find_available_drivers
+      second_driver = Driver.find_available_drivers
 
-        expect(new_passenger.num_of_rides).must_be_instance_of Integer
-        expect(new_passenger.num_of_rides).must_equal 2
-      end
+      Trip.create(driver_id: frist_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 5, cost: 12)
+      Trip.create(driver_id: second_driver.id, passenger_id: new_passenger.id, date: Date.today, rating: 5, cost: 50)
+
+      expect(new_passenger.num_of_rides).must_be_instance_of Integer
+      expect(new_passenger.num_of_rides).must_equal 2
     end
   end
 end
