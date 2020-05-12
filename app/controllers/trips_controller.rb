@@ -19,7 +19,6 @@ class TripsController < ApplicationController
     end 
   end
 
-
   def create 
     passenger = Passenger.find_by(id: params[:passenger_id])
 
@@ -44,7 +43,6 @@ class TripsController < ApplicationController
       end 
     end 
   end
-
 
   def edit 
     trip_id = params[:id]
