@@ -84,15 +84,6 @@ class DriversController < ApplicationController
       redirect_to driver_path(@driver) 
       return
     end 
-
-    
-    # elsif @driver.available
-    #   @driver.update(available: false)
-    # else 
-    #   @driver.update(available: true)
-    # end 
-
-    # redirect_to driver_path(@driver) 
   end
 
   private 

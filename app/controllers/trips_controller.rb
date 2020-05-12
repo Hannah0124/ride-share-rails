@@ -21,14 +21,12 @@ class TripsController < ApplicationController
 
 
   def create 
-    # raise
     passenger = Passenger.find_by(id: params[:passenger_id])
 
     if passenger.nil?
       render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
     else 
       trip_data = Trip.connect_trip
-      # @trip = Trip.new(trip_data)
 
       @trip = Trip.new({
         driver_id: trip_data[:driver_id],
