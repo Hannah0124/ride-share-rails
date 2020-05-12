@@ -1,6 +1,6 @@
 // Place all the styles related to the Homepages controller here.
 .homepages__index-container {
-  background-image: url("rideshare.jpg");
+  background-image: url("https://i.ibb.co/wpn8QP6/rideshare.jpg");
   background-color: #cccccc;
   // position: absolute;
   top: 0;
@@ -30,11 +30,11 @@
 
 @media only screen and (max-width: 879px) {  
   .homepages__index-drivers {
-    background-image: url("driver.jpg");
+    background-image: url("https://i.ibb.co/r3RS5KH/driver.jpg");
   }
   
   .homepages__index-passengers {
-    background-image: url("passenger.jpg");
+    background-image: url("https://i.ibb.co/R6kLb9W/passenger.jpg");
   }
 
   .homepages__index-drivers, .homepages__index-passengers {
