@@ -295,8 +295,9 @@ footer {
 	background-color: #fff;
 	opacity: 0.8;
 	padding-left: 10px;
-	padding-top: 10px;
-	padding-bottom: 0;
+	margin-top: 20px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 	z-index: 2;
 	height: 35px;
 }
@@ -308,3 +309,27 @@ footer {
 	}
 }
 
+.menu {
+	display: flex; 
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.menu > li {
+	justify-self: center;
+	align-self: center;
+}
+
+.flash-msg__section {
+	margin: 0;
+  color: darkred;
+  background-color: rgb(240, 240, 186);
+  width: 100%;
+  font-size: 15px;
+  text-align: center;
+}
+
+.errors {
+  margin: 0;
+}

@@ -1,4 +1,12 @@
 // Place all the styles related to the Homepages controller here.
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .homepages__index-container {
   background-image: url("https://i.ibb.co/wpn8QP6/rideshare.jpg");
   background-color: #cccccc;
@@ -11,8 +19,8 @@
   background-size: cover;
   display: flex;
   align-items: center;
+  animation: fadeIn 0.5s linear;
 }
-
 
 .homepages__index-drivers, .homepages__index-passengers {
   width: 100%;
@@ -31,10 +39,12 @@
 @media only screen and (max-width: 879px) {  
   .homepages__index-drivers {
     background-image: url("https://i.ibb.co/r3RS5KH/driver.jpg");
+    animation: fadeIn 0.5s linear;
   }
   
   .homepages__index-passengers {
     background-image: url("https://i.ibb.co/R6kLb9W/passenger.jpg");
+    animation: fadeIn 0.5s linear;
   }
 
   .homepages__index-drivers, .homepages__index-passengers {
