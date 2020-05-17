@@ -21,9 +21,11 @@ class PassengersController < ApplicationController
     @passenger = Passenger.new(passenger_params)
 
     if @passenger.save
+      flash[:success] = "#{@passenger.name} was successfully added! 😄"
       redirect_to passenger_path(@passenger)
       return 
     else 
+      flash.now[:error] = "The passenger was not succesfully added :("
       render :new
       return 
     end 

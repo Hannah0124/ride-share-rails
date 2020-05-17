@@ -24,9 +24,11 @@ class TripsController < ApplicationController
 
     if passenger.nil?
       render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
-    else 
-      trip_data = Trip.connect_trip
+    end  
 
+
+    trip_data = Trip.connect_trip
+    if trip_data 
       @trip = Trip.new({
         driver_id: trip_data[:driver_id],
         passenger_id: passenger.id,
@@ -35,13 +37,19 @@ class TripsController < ApplicationController
       })
 
       if @trip.save
+        flash[:success] = "The trip was successfully conneted! 😄"
         redirect_to passenger_path(passenger)
         return 
       else 
+        flash.now[:error] = "The trip was not successfully conneted :("
         render :new
         return 
       end 
-    end 
+    else 
+      flash[:error] = "There was no available driver at the moment. :("
+      redirect_to passenger_path(passenger)
+      return 
+    end
   end
 
   def edit 

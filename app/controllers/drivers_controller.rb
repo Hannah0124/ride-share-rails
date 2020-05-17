@@ -17,13 +17,16 @@ class DriversController < ApplicationController
     @driver = Driver.new
   end
 
+
   def create
     @driver = Driver.new(driver_params)
 
     if @driver.save
+      flash[:success] = "#{@driver.name} was successfully added! 😄"
       redirect_to driver_path(@driver)
       return 
     else 
+      flash.now[:error] = "The driver was not succesfully added :("
       render :new
       return 
     end 
@@ -48,10 +51,12 @@ class DriversController < ApplicationController
       return 
 
     elsif @driver.update(driver_params) 
+      flash[:success] = "#{@driver.name} was successfully edited! 😄"
       redirect_to driver_path(@driver.id)
       return 
 
     else 
+      flash.now[:error] = "The driver was not succesfully edited :("
       render :edit
       return 
     end
